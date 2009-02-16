@@ -20,32 +20,42 @@ filter:    erb
 
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/site.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/style.css" type="text/css" />
 </head>
 <body>
 
 <div class="container">
 
    <div class="column span-20 prepend-2 append-2 first last" id="header">
-     <p class="title">A New Website</p>
-     <hr>
+     <a href="/">
+       <img src="/images/banner.gif" alt="Lucky-Dip Blog"/>
+     </a>
    </div>
 
-   <div class="column span-15 prepend-2 first">
+   <div class="column span-15 prepend-2 first content">
       <%= @content %>
    </div>
 
-   <div class="column span-5 append-2 last">
-      <h4>Sidebar</h4>
-      <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras ornare mattis nunc. Mauris venenatis, pede sed aliquet vehicula, lectus tellus pulvinar neque, non cursus sem nisi vel augue. </p>
+   <div class="column span-5 append-2 last sidebar">
+     <h4>About</h4>
+     <div>
+       <img style="float: left;" src="/images/brad_head.gif" />
+       <p>My name is Brad. I am a programmer from Sydney, Australia. I like Haml and Rails and, well, all the stuff in the tags.
+       </p>
+       <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
+       <br />
+     </div>
 
-      <div class="box">
-         <p class="last">Mauris a lectus. Aliquam erat volutpat. Phasellus ultrices mi a sapien. Nunc rutrum egestas lorem. Duis ac sem sagittis elit tincidunt gravida.</p>
-      </div>
+     <h4>Archives</h4>
+     <div>
+       
+     </div>
 
-      <p class="quiet">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras ornare mattis nunc. Mauris venenatis, pede sed aliquet vehicula, lectus tellus pulvinar neque, non cursus sem nisi vel augue.</p>
+     <h4>Syndicate</h4>
+     <div>
+       <a link="#">RSS</a>
+     </div>
 
-      <h5>Incremental leading</h5>
-      <p class="incr">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras ornare mattis nunc. Mauris venenatis, pede sed aliquet vehicula, lectus tellus pulvinar neque, non cursus sem nisi vel augue. sed aliquet vehicula, lectus tellus.</p>
    </div>
 
    <div class="column span-20 prepend-2 append-2 first last" id="footer">
