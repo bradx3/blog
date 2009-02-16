@@ -1,20 +1,15 @@
 --- 
 title: Time To Go
-filters: textile
+filters: html
 created_at: 2009-02-10 08:56:05 +11:00
 blog_post: true
 ---
 <p>I've just released my first iPhone application.</p>
-
 <p>Time To Go is designed to be the quickest way to tell when the train you need to catch leaves. I use it just before I leave work to know whether I need to run to the station to catch the next train.</p>
-
 <p>The latest version of the app (currently in review), has timetable error reporting built in.
 
 <p>
 <a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=304313690&mt=8">iTunes Store URL</a></p>
 
 <p>
-<p>
-Please visit the <a href="http://
-Screenshot:<br /><br />
-<a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=304313690&mt=8"><img src="/files/screenshot.jpg" /></a></p>
+Please visit the <a href="http://timetogo.lucky-dip.net">Dedicated Time To Go</a> page for screenshots and more information.

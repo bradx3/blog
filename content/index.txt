@@ -1,5 +1,5 @@
 ---
-title:      2009
+title:      Lucky-Dip Blog
 created_at: 2009-02-16 17:32:47.962443 +11:00
 filter:     erb
 dirty:      true
@@ -8,7 +8,7 @@ dirty:      true
   articles = @pages.find(:all, :in_directory => "", :recursive => true,
       :sort_by => "created_at", :reverse => true, :blog_post => true)
   articles.delete(@page)
-  paginate(articles, 10) do |page|
+  paginate(articles, 50) do |page|
 -%>
 <div class="article">
   <h1><%= link_to_page(page) %><span class="date">(<%= page.created_at.strftime('%Y-%m-%d') %>)</span></h1>
@@ -18,3 +18,7 @@ dirty:      true
   </div>
 </div>
 <% end -%>
+<div class="links">
+     <%= link_to("Newer posts", @pager.prev) if @pager.prev? %>
+     <%= link_to("Older posts", @pager.next) if @pager.next? %>
+</div>

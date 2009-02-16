@@ -10,7 +10,7 @@ filter:    erb
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-   <title><%= h(@page.title) %></title>
+   <title>Lucky-dip Blog - <%= h(@page.title) %></title>
   <subtitle><%= h(@page.subtitle) %></subtitle>
   <link href="http://<%= @page.site %>//" rel="self" />
   <link href="http://<%= @page.site %>/" />
@@ -20,11 +20,12 @@ filter:    erb
     <email><%= h(@page.email) %></email>
   </author>
   <id>http://<%= @page.site %>/</id>
-  <% @pages.find(:limit => 10,
-                 :in_directory => 'blog',
+  <% @pages.find(:limit => 50,
+                 :in_directory => "",
                  :recursive => true,
                  :sort_by => 'mtime',
-                 :reverse => true).each do |article|
+                 :reverse => true,
+		 :blog_post => true).each do |article|
     next if article == @page
     next if article.url.index(".DS_Store")
   %>

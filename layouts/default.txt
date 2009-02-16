@@ -40,20 +40,23 @@ filter:    erb
      <h4>About</h4>
      <div>
        <img src="/images/brad_head.gif" />
-       <p>My name is Brad. I am a programmer from Sydney, Australia. I like Haml and Rails and, well, all the stuff in the tags.
+       <p>My name is Brad. I am a programmer from Sydney, Australia. I like lots of coding stuff, but especially ruby, haml and cocoa.
        </p>
        <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
-       <br />
      </div>
 
-     <h4>Archives</h4>
+     <h4>What I'm...</h4>
      <div>
-       
+       <ul>
+       <li><a href="http://github.com/bradx3">Working on</a></li>
+       <li><a href="http://twitter.com/bradx3">Thinking</a></li>
+       <li><a href="http://www.last.fm/user/bradbradbrad">Listening to</a></li>
+       </ul>
      </div>
 
      <h4>Syndicate</h4>
      <div>
-       <a link="/feed.xml">RSS</a>
+       <a href="/feed.xml">RSS</a>
      </div>
 
    </div>
