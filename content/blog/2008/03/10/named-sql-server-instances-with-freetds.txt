@@ -2,8 +2,7 @@
 title: Named SQL Server Instances with FreeTDS
 filters: textile
 created_at: 2008-03-10 19:33:57 +11:00
-keywords: 
-- freetds
+blog_post: true
 ---
 <p>
 <a href="http://permalink.gmane.org/gmane.comp.db.tds.freetds/9182">A helpful post on accessing named sql server instances using freetds</a>
