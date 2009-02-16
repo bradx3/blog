@@ -39,7 +39,7 @@ filter:    erb
    <div class="column span-5 append-2 last sidebar">
      <h4>About</h4>
      <div>
-       <img style="float: left;" src="/images/brad_head.gif" />
+       <img src="/images/brad_head.gif" />
        <p>My name is Brad. I am a programmer from Sydney, Australia. I like Haml and Rails and, well, all the stuff in the tags.
        </p>
        <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
