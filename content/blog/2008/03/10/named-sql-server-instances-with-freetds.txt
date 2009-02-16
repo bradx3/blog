@@ -1,0 +1,27 @@
+--- 
+title: Named SQL Server Instances with FreeTDS
+filters: textile
+created_at: 2008-03-10 19:33:57 +11:00
+keywords: 
+- freetds
+---
+<p>
+<a href="http://permalink.gmane.org/gmane.comp.db.tds.freetds/9182">A helpful post on accessing named sql server instances using freetds</a>
+</p>
+
+<p>
+I was having a lot of trouble doing that. Turns out the 'instance' key exists. As far as I could find it wasn't in the doc anywhere, so this is just a post in the hope that it'll save somebody else some time in the future.
+</p>
+
+From the post:
+<pre class="code">
+[def]
+host = abc
+instance = def
+port = 1433
+client charset = UTF-8
+tds version = 8.0
+</pre>
+
+
+

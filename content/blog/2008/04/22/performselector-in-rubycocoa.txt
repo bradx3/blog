@@ -1,0 +1,22 @@
+--- 
+title: performSelector in RubyCocoa
+filters: textile
+created_at: 2008-04-22 15:04:21 +10:00
+keywords: 
+- ruby
+- " cocoa"
+---
+<p>
+I had a lot of trouble finding documentation for this. If you want to make a call on the main thread in RubyCocoa, the format is something like:
+</p>
+<pre class="code">
+performSelectorOnMainThread_withObject_waitUntilDone('method_name:', object, true)
+</pre>
+
+<p>
+So two things that took me a while:
+<ol>
+<li>method_name has a trailing colon. </li>
+<li>The object the has the method you want to call should be the second argument. I got it in my head it should be the first for some reason.</li>
+</ol>
+</p>
