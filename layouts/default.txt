@@ -53,7 +53,7 @@ filter:    erb
 
      <h4>Syndicate</h4>
      <div>
-       <a link="#">RSS</a>
+       <a link="/feed.xml">RSS</a>
      </div>
 
    </div>
