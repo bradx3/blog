@@ -1,0 +1,21 @@
+--- 
+title: performSelector in RubyCocoa
+filter: erb
+blog_post: true
+created_at: 2008-04-22 15:04:21 +10:00
+keywords: ruby, cocoa
+---
+<div class="article"><h1><%= link_to_page(@page) %><span class="date">(<%= @page.created_at.strftime('%Y-%m-%d') %>)</span></h1><div class="body"><p>
+I had a lot of trouble finding documentation for this. If you want to make a call on the main thread in RubyCocoa, the format is something like:
+</p>
+<pre class="code">
+performSelectorOnMainThread_withObject_waitUntilDone('method_name:', object, true)
+</pre>
+
+<p>
+So two things that took me a while:
+<ol>
+<li>method_name has a trailing colon. </li>
+<li>The object the has the method you want to call should be the second argument. I got it in my head it should be the first for some reason.</li>
+</ol>
+</p></div><div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>

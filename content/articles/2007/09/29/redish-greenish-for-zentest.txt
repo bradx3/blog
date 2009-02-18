@@ -1,0 +1,52 @@
+--- 
+title: Redish Greenish for ZenTest
+filter: erb
+blog_post: true
+created_at: 2007-09-29 13:39:00 +10:00
+keywords: zentest
+---
+<div class="article"><h1><%= link_to_page(@page) %><span class="date">(<%= @page.created_at.strftime('%Y-%m-%d') %>)</span></h1><div class="body"><p>
+<a href="http://www.zenspider.com/ZSS/Products/ZenTest/">ZenTest</a> is a great tool. I use it and its redgreen plugin a lot to easily keep an eye on my tests.
+</p>
+
+<p>
+I use a green terminal background though, so when my tests pass, rather than a green line, I have to rely on a lack of a red line. This isn't so bad, but I thought it could be improved with a little effort.
+</p>
+
+<p>
+Redish greenish is an extension of redgreen that allows you to specify the colours used for tests passing and/or failing.
+</p>
+
+<p>
+To use it, <a href="http://blog.lucky-dip.net/files/redishgreenish.rb">save this file</a> into your autotest lib directory. (Mine is GEM_PATH/1.8/gems/ZenTest-3.6.1/lib/autotest/). To enable redishgreenish, you'll need to modify your autotest config file. Open "~/.autotest" and change the line:
+<br />
+<code>
+require 'autotest/redgreen'
+</code>
+<br />
+to 
+<br />
+<code>
+require 'autotest/redishgreenish'
+</code>
+</p>
+
+<p>
+At this point, autotest will behave exactly the same as if redgreen was used. To change the colour of the lines used to signify tests passing and failing, your autotest config file should look like
+<br />
+<code>
+PASSED = :blue
+<br />
+FAILED = :yellow
+<br />
+require 'autotest/redishgreenish'
+</code>
+</p>
+
+<p>
+Valid values for colours are
+<br />
+<code>
+:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white
+</code>
+</p></div><div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>

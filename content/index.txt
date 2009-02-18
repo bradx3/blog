@@ -10,13 +10,7 @@ dirty:      true
   articles.delete(@page)
   paginate(articles, 50) do |page|
 -%>
-<div class="article">
-  <h1><%= link_to_page(page) %><span class="date">(<%= page.created_at.strftime('%Y-%m-%d') %>)</span></h1>
-
-  <div class="body">
-    <%= render(page) %>
-  </div>
-</div>
+  <%= render(page) %>
 <% end -%>
 <div class="links">
      <%= link_to("Newer posts", @pager.prev) if @pager.prev? %>

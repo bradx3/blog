@@ -1,0 +1,14 @@
+--- 
+title: Random wallpaper from socwall.com
+filter: erb
+blog_post: true
+created_at: 2008-09-01 18:14:30 +10:00
+keywords: ruby, wallpaper
+---
+<div class="article"><h1><%= link_to_page(@page) %><span class="date">(<%= @page.created_at.strftime('%Y-%m-%d') %>)</span></h1><div class="body"><p>I quite like http://socwall.com. They have a rss feed for recent posts, but I wrote a small script to download a random selection instead.</p>
+<p>
+On OSX I could then set my desktop background to be a random picture from a folder. In my case that folder was /Users/brad/Pictures/Wallpapers/ but that could be easily changed.
+</p>
+<p>
+The code is after the jump.
+</p></div><div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>

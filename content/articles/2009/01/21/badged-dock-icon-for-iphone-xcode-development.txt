@@ -1,0 +1,17 @@
+--- 
+title: Badged Dock Icon for IPhone XCode development
+filter: erb
+blog_post: true
+created_at: 2009-01-21 11:20:27 +11:00
+keywords: iphone, xcode
+---
+<div class="article"><h1><%= link_to_page(@page) %><span class="date">(<%= @page.created_at.strftime('%Y-%m-%d') %>)</span></h1><div class="body"><p><a href="http://twitter.com/drnic">Dr Nic</a> made a good suggestion on Twitter for a way to badge the XCode icon with the one currently in use.</p>
+
+<p>
+Here's my attempt:
+<a href="http://gist.github.com/49767">http://gist.github.com/49767</a>
+</p>
+
+<p>It relies on ImageMagick being installed (port install ImageMagick) and should be run from the project's directorin in the terminal.</p>
+
+</div><div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>

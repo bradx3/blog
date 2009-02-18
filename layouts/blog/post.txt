@@ -1,0 +1,9 @@
+---
+extension: html
+filter:    erb
+layout:    default
+dirty:     true
+---
+<%= @content %>
+<hr>
+<%= render :partial => '/comments' %> 
