@@ -2,10 +2,11 @@
 title: ZSH
 filter: erb
 blog_post: true
+layout: blog/post
 created_at: 2008-06-27 14:06:20 +10:00
 keywords: zsh
 ---
-<div class="article"><h1><%= link_to_page(@page) %><span class="date">(<%= @page.created_at.strftime('%Y-%m-%d') %>)</span></h1><div class="body"><p>I've been zsh lately. I get the feeling most shells have similar features, but somehow I stumbled across a good config file for this one. It's so good I think it is worth sharing.</p>
+<p>I've been zsh lately. I get the feeling most shells have similar features, but somehow I stumbled across a good config file for this one. It's so good I think it is worth sharing.</p>
 
 <p>
 Features that I like in zsh:
@@ -22,4 +23,4 @@ Features that I like in zsh:
 <p>
 My zshrc is available here on github:
 <a href="http://github.com/bradx3/dotfiles/tree/master/.zshrc">http://github.com/bradx3/dotfiles/tree/master/.zshrc</a>
-</p></div><div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</p>

@@ -4,6 +4,15 @@ filter:    erb
 layout:    default
 dirty:     true
 ---
-<%= @content %>
-<hr>
-<%= render :partial => '/comments' %> 
+<div class="article">
+    <h1>
+      <%= link_to_page(@page) %>
+      <span class="date">
+	(<%= @page.created_at.strftime('%Y-%m-%d') %>)
+      </span>
+    </h1>
+     <div class="body">
+       <%= @content %>
+     </div>
+     <%= render :partial => '/comments' %> 
+</div>
