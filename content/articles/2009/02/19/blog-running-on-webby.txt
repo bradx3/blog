@@ -18,3 +18,8 @@ filter:
 <p>
   Anyway if anybody notices any problems, please leave a comment and I'll get it fixed up. Unless it's a problem posting comments. 
 </p>
+<p>
+  <strong>
+    Update: Comments are display fine now. Wooh.
+  </strong>
+</p>
