@@ -1,6 +1,7 @@
 SITE.user = "brad"
 SITE.host = 'hubert.lucky-dip.net'
 SITE.remote_dir = "/var/www/blog/"
+SITE.blog_dir = "articles"
 
 task :default => :build
 
