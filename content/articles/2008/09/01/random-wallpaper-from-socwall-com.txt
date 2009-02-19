@@ -11,5 +11,50 @@ keywords: ruby, wallpaper
 On OSX I could then set my desktop background to be a random picture from a folder. In my case that folder was /Users/brad/Pictures/Wallpapers/ but that could be easily changed.
 </p>
 <p>
-The code is after the jump.
+<% coderay(:lang => "ruby", :line_numbers => :list) do -%>
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'hpricot'
+require 'open-uri'
+require 'Pathname'
+ 
+URL = 'http://socwall.com/browse/index.php?wpSortby=8'
+DEST = "/Users/brad/Pictures/Wallpapers/"
+
+
+def clear_old_images
+  Pathname.new(DEST).children.each { |f| f.delete }
+end
+
+def download_images(count)
+  count = count.to_i
+  
+  while count > 0
+    doc = Hpricot(open(URL))
+    
+    doc.search("div.wpThumbnail").each do |thumb|
+      next if count == 0
+      
+      thumbnail = thumb.at("img")['src']
+      image = thumbnail.gsub(/\/tb_/, '/')
+      image = image.gsub(" ", "%20")
+      
+      remote_image = open(image, "User-Agent" => "Ruby/#{RUBY_VERSION}")
+      local_image = open("#{ DEST }/#{ count }.png", 'w')
+      local_image.write(remote_image.read)
+      
+      remote_image.close
+      local_image.close
+      
+      count -= 1
+    end
+  end
+end
+
+count = ARGV[0] || 10
+
+clear_old_images
+download_images(count)
+<% end -%>
 </p>

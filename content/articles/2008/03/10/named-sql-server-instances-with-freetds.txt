@@ -15,14 +15,14 @@ I was having a lot of trouble doing that. Turns out the 'instance' key exists. A
 </p>
 
 From the post:
-<pre class="code">
+<% coderay(:lang => :config, :line_numbers => :list) do -%>
 [def]
 host = abc
 instance = def
 port = 1433
 client charset = UTF-8
 tds version = 8.0
-</pre>
+<% end -%>
 
 
 

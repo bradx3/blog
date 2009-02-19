@@ -1,9 +1,10 @@
 .CodeRay {
-  padding: 0.5em;
+  line-height: 0.4;
+    padding: 0;
   margin-bottom: 1.3em;
   background-color: #eee;
   border: 1px solid #aaa;
-  font: 1.1em Monaco, 'Courier New', 'Terminal', monospace;
+  font-family: Monaco, 'Courier New', 'Terminal', monospace;
   color: #100;
 }
 .CodeRay pre {
@@ -12,6 +13,7 @@
   overflow: auto;
   background-color: transparent;
   border: none;
+    line-height: 0;
 }
 
 div.CodeRay { }
@@ -29,7 +31,11 @@ table.CodeRay td { padding: 2px 4px; vertical-align: top }
 .CodeRay .line_numbers tt { font-weight: bold }
 .CodeRay .no { padding: 0px 4px }
 
-ol.CodeRay { font-size: 10pt }
+ol.CodeRay { 
+    font-size: 12px; 
+    margin: 0.5em 0.6em 0.5em 3em;
+    padding-left: 5px;
+}
 ol.CodeRay li { white-space: pre }
 
 .CodeRay .debug { color:white ! important; background:blue ! important; }

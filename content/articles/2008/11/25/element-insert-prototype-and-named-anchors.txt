@@ -10,17 +10,17 @@ keywords: html,prototype
 
 <p>
 HTML:
-<pre class="code">
-&lt;a name="questions" /&gt;
-&lt;div class="questions"&gt;
-&lt;/div&gt;
-</pre>
+<% coderay(:lang => "html", :line_numbers => :list) do -%>
+<a name="questions">
+<div class="questions">
+</div>
+<% end -%>
 </p>
 <p>
 JS:
-<pre class="code">
-Element.insert("questions", { bottom : "&lt;div&gt;Test&lt;/div&gt;" });
-</pre>
+<% coderay(:lang => "javascript", :line_numbers => :list) do -%>
+Element.insert("questions", { bottom : "<div>Test</div>" })
+<% end -%>
 </p>
 <p>
 With that setup, IE compains and says "Invalid source HTML for this operation". It turns out that prototype was trying to put the div into the a tag. I guess I can see how it happened, but I sure didn't expect it. 
