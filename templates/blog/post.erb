@@ -2,15 +2,7 @@
 title:      <%= title %>
 created_at: <%= Time.now.to_y %>
 blog_post:  true
+layout: blog/post
 filter:
   - erb
 --- 
-<div class="article">
-  <h1>
-    <%= link_to_page(@page) %>
-    <span class="date">(<%= @page.created_at.strftime('%Y-%m-%d') %>)</span>
-  </h1>
-  <div class="body">
-    <p>...</p>
-  </div>
-</div>
