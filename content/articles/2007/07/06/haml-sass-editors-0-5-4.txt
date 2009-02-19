@@ -6,6 +6,7 @@ layout: blog/post
 created_at: 2007-07-06 14:25:41 +10:00
 keywords: haml,sass,aptana
 ---
+<p><strong>These editors have been merged into the <a href="http://aptana.com/">Aptana</a> project. Please don't post any error reports here.</strong></p> 
 <p>Last release didn't go so well. For some reason I figured other people had tried to install Aptana, had it fail and then given up on it like me. Turns out I was alone haha.</p>
 
 <p>
