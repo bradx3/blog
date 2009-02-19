@@ -17,4 +17,4 @@ keywords: iphone
 
 <p>
 Screenshot:<br /><br />
-<a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=304313690&mt=8"><img src="/files/screenshot.jpg" /></a></p>
+<a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=304313690&mt=8"><img src="/images/screenshot.jpg" /></a></p>
