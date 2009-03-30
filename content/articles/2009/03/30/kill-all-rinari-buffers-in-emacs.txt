@@ -1,0 +1,39 @@
+--- 
+title:      Kill All Rinari Buffers in Emacs
+created_at: 2009-03-30 16:33:54.570734 +11:00
+blog_post:  true
+layout: blog/post
+filter:
+  - erb
+--- 
+<p>
+I've been using Emacs for development for a few months now and am pretty happy with it. 
+</p>
+<p>
+I use the Rinari mode to provide some help when I'm working on Rails projects. Once I'm finished for the day (or changing
+to another project, I used to use the kill-some-buffers command and go through them one by one.
+</p>
+<p>
+Here's some elisp that I've written and put in my .emacs file that just kills all buffers that link to files
+that are in the current rinari-root. It's probably not perfect, but it seems to work most of the time.
+</p>
+<% coderay(:lang => "lisp", :line_numbers => :list) do -%>
+;; some rinari helpers
+(defun kill-buffers-in-subdir (subdir buffer)
+  "Kills the given buffer if it is linked to a file in the current rinari project."
+  (if (buffer-in-subdir-p subdir buffer)
+     (kill-buffer buffer)))
+
+(defun buffer-in-subdir-p (subdir buffer) 
+  "Returns true if buffer belongs to the current rinari project"
+  (and (buffer-file-name buffer)
+       (string-match subdir (buffer-file-name buffer))))
+
+(defun kill-all-rinari-buffers ()
+  "Kills all buffers linked to the current rinari project"
+  (interactive)
+  (let ((path (rinari-root)))
+    (if path
+	(dolist (buffer (buffer-list))
+	  (kill-buffers-in-subdir path buffer)))))
+<% end -%>
