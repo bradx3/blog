@@ -21,6 +21,20 @@ filter:    erb
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/site.css" type="text/css" media="screen, projection" />
    <link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+   <!-- SyntaxHighlighter -->
+   <script type="text/javascript" src="scripts/shCore.js"></script>
+   <script type="text/javascript" src="scripts/shBrushBash.js"></script>
+   <script type="text/javascript" src="scripts/shBrushJScript.js"></script>
+   <script type="text/javascript" src="scripts/shBrushPlain.js"></script>
+   <script type="text/javascript" src="scripts/shBrushRuby.js"></script>
+   <script type="text/javascript" src="scripts/shBrushSql.js"></script>
+   <link type="text/css" rel="stylesheet" href="styles/shCore.css"/>
+   <link type="text/css" rel="stylesheet" href="styles/shThemeDefault.css"/>
+   <script type="text/javascript">
+     SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+     SyntaxHighlighter.all();
+   </script>
 </head>
 <body>
 
