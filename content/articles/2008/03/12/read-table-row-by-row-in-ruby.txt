@@ -12,7 +12,7 @@ I needed to export some data from a huge data table. Iterating through MyModel.f
 
 Example code was tough to find, so here's an example:
 
-<% coderay(:lang => "ruby", :line_numbers => :list) do -%>
+<pre class="brush: ruby">
 sql = "select * from #{ MyModel.table_name }"
 MyModel.connection.execute(sql) do |handle|
   handle.fetch do |row|
@@ -20,4 +20,4 @@ MyModel.connection.execute(sql) do |handle|
     ... export row ...
   end
 end
-<% end -%>
+</pre>

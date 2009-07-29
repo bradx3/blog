@@ -8,13 +8,14 @@ filter:
 --- 
 <p>
 For some reason, this command:
-<% coderay(:lang => "bash", :line_numbers => :list) do -%>
+<pre class="brush: bash">
 jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails
-<% end -%>
+</pre>
 didn't install all the required gems I needed.
 </p>
 <p>
 Manually listing all the basic rails gems needed fixed the problem for me though. Working command:
-<% coderay(:lang => "bash", :line_numbers => :list) do -%>
-jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails activesupport actionmailer activerecord actionpack activeresource
-<% end -%>
+<pre class="brush: bash">
+jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails \
+activesupport actionmailer activerecord actionpack activeresource
+</pre>

@@ -21,31 +21,31 @@ Redish greenish is an extension of redgreen that allows you to specify the colou
 <p>
 To use it, <a href="http://blog.lucky-dip.net/files/redishgreenish.rb">save this file</a> into your autotest lib directory. (Mine is GEM_PATH/1.8/gems/ZenTest-3.6.1/lib/autotest/). To enable redishgreenish, you'll need to modify your autotest config file. Open "~/.autotest" and change the line:
 <br />
-<% coderay(:lang => "ruby", :line_numbers => :list) do -%>
+<pre class="brush: ruby">
 require 'autotest/redgreen'
-<% end -%>
+</pre>
 <br />
 to 
 <br />
-<% coderay(:lang => "ruby", :line_numbers => :list) do -%>
+<pre class="brush: ruby">
 require 'autotest/redishgreenish'
-<% end -%>
+</pre>
 </p>
 
 <p>
 At this point, autotest will behave exactly the same as if redgreen was used. To change the colour of the lines used to signify tests passing and failing, your autotest config file should look like
 <br />
-<% coderay(:lang => "ruby", :line_numbers => :list) do -%>
+<pre class="brush: ruby">
 PASSED = :blue
 FAILED = :yellow
 require 'autotest/redishgreenish'
-<% end -%>
+</pre>
 </p>
 
 <p>
 Valid values for colours are
 <br />
-<% coderay(:lang => "ruby", :line_numbers => :list) do -%>
+<pre class="brush: ruby">
 :black, :red, :green, :yellow, :blue, :magenta, :cyan, :white
-<% end -%>
+</pre>
 </p>

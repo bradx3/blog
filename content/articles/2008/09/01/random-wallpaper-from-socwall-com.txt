@@ -11,7 +11,7 @@ keywords: ruby, wallpaper
 On OSX I could then set my desktop background to be a random picture from a folder. In my case that folder was /Users/brad/Pictures/Wallpapers/ but that could be easily changed.
 </p>
 <p>
-<% coderay(:lang => "ruby", :line_numbers => :list) do -%>
+<pre class="brush: ruby">
 #!/usr/bin/ruby
 
 require 'rubygems'
@@ -40,7 +40,8 @@ def download_images(count)
       image = thumbnail.gsub(/\/tb_/, '/')
       image = image.gsub(" ", "%20")
       
-      remote_image = open(image, "User-Agent" => "Ruby/#{RUBY_VERSION}")
+      remote_image = open(image, 
+                          "User-Agent" => "Ruby/#{RUBY_VERSION}")
       local_image = open("#{ DEST }/#{ count }.png", 'w')
       local_image.write(remote_image.read)
       
@@ -56,5 +57,5 @@ count = ARGV[0] || 10
 
 clear_old_images
 download_images(count)
-<% end -%>
+</pre>
 </p>

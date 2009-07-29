@@ -17,7 +17,7 @@ to another project, I used to use the kill-some-buffers command and go through t
 Here's some elisp that I've written and put in my .emacs file that just kills all buffers that link to files
 that are in the current rinari-root. It's probably not perfect, but it seems to work most of the time.
 </p>
-<% coderay(:lang => "lisp", :line_numbers => :list) do -%>
+<pre class="brush: plain">
 ;; some rinari helpers
 (defun kill-buffers-in-subdir (subdir buffer)
   "Kills the given buffer if it is linked to a file in the current rinari project."
@@ -36,4 +36,4 @@ that are in the current rinari-root. It's probably not perfect, but it seems to 
     (if path
 	(dolist (buffer (buffer-list))
 	  (kill-buffers-in-subdir path buffer)))))
-<% end -%>
+</pre>

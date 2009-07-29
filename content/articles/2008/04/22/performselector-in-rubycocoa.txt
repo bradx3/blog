@@ -9,9 +9,9 @@ keywords: ruby, cocoa
 <p>
 I had a lot of trouble finding documentation for this. If you want to make a call on the main thread in RubyCocoa, the format is something like:
 </p>
-<% coderay(:lang => "c", :line_numbers => :list) do -%>
+<pre class="brush: ruby">
 performSelectorOnMainThread_withObject_waitUntilDone('method_name:', object, true)
-<% end -%>
+</pre>
 
 <p>
 So two things that took me a while:
