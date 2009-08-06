@@ -8,7 +8,8 @@ filter:
 --- 
 <p>
 Being able to completely re-program your editor is fun. I feel like I've got a 
-long way to go before I'm an Emacs Guru, but it's not being able to easily
+long way to go before I'm an Emacs Guru (if anybody *ever* becomes a true
+Emacs Guru), but it's nice being able to easily
 automate things I do in my editor.
 </p>
 <p>
