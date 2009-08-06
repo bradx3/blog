@@ -55,7 +55,7 @@ filter:    erb
      <h4>About</h4>
      <div>
        <img src="/images/brad_head.gif" />
-       <p>My name is Brad. I am a programmer from Sydney, Australia. I like lots of coding stuff, but especially ruby, haml and cocoa.
+       <p>My name is Brad. I am a programmer from Sydney, Australia. I like lots of coding stuff, but especially ruby and iPhone.
        </p>
        <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
      </div>
@@ -65,7 +65,6 @@ filter:    erb
        <ul>
        <li><a href="http://github.com/bradx3">Working on</a></li>
        <li><a href="http://twitter.com/bradx3">Thinking</a></li>
-       <li><a href="http://www.last.fm/user/bradbradbrad">Listening to</a></li>
        </ul>
      </div>
 
