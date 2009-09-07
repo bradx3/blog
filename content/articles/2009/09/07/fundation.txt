@@ -1,0 +1,31 @@
+--- 
+title:      Fundation
+created_at: 2009-09-07 13:40:10.369667 +10:00
+blog_post:  true
+layout: blog/post
+filter:
+  - erb
+--- 
+<p>
+  I've kept my saving in a single, high interest account for a while now. It
+  works particularly well as a contractor in that I can put aside tax and GST
+  and earn interest on that before I have to pay it to the government.
+</p>
+<p>
+  It has been a bit difficult to keep track of how much money was saving, and how
+  much was tax/GST though, so I've written a simple app to keep track.
+</p>
+<p>
+  <a href="http://fundation.lucky-dip.net">Fundation</a> lets you set up
+  funds to manage your saving. Each paycheck can be automatically divided up
+  into the different funds in ratios you specify.
+</p>
+<p>
+  Anyway, <a href="http://fundation.lucky-dip.net">Fundation</a> is free to use,
+  so if you're having trouble remembering how much money you've got to spend, give it
+  a try <a href="http://fundation.lucky-dip.net">here</a>.
+</p>
+<p>
+  If you have any errors in Fundation, or any suggestions for improvements,
+  please use the comments of this post to provide them.
+</p>
