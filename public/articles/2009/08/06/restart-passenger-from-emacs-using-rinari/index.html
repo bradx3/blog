@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Restart Passenger From Emacs Using Rinari</title>
+   <meta name="author" content="" />
+
+   <!--- Blueprint CSS Framework -->
+   <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
+
+   <!-- CodeRay syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/coderay.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/site.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+   <!-- SyntaxHighlighter -->
+   <script type="text/javascript" src="/scripts/shCore.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushBash.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushJScript.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushPlain.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushRuby.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushSql.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushXml.js"></script>
+   <link type="text/css" rel="stylesheet" href="/styles/shCore.css"/>
+   <link type="text/css" rel="stylesheet" href="/styles/shThemeDefault.css"/>
+   <script type="text/javascript">
+     SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+     SyntaxHighlighter.all();
+   </script>
+</head>
+<body>
+
+<div class="container">
+
+   <div class="column span-20 prepend-2 append-2 first last" id="header">
+     <a href="/">
+       <img src="/images/banner.gif" alt="Lucky-Dip Blog"/>
+     </a>
+   </div>
+
+   <div class="column span-15 prepend-2 first content">
+      <div class="article">
+    <h1>
+      <a href="/articles/2009/08/06/restart-passenger-from-emacs-using-rinari/">Restart Passenger From Emacs Using Rinari</a>
+      <span class="date">
+	(2009-08-06)
+      </span>
+    </h1>
+     <div class="body">
+       <p>
+Being able to completely re-program your editor is fun. I feel like I've got a 
+long way to go before I'm an Emacs Guru (if anybody *ever* becomes a true
+Emacs Guru), but it's nice being able to easily
+automate things I do in my editor.
+</p>
+<p>
+I've been experimenting with using <a href="http://www.modrails.com/">Passenger</a>
+in development instead of script/server. It's not too bad. It's nice to have
+a server always ready to go, but it does make dropping down to the debugger
+difficult.
+</p>
+<p>
+Anyway, here is a small snippet of emacs lisp to easily restart the Passenger
+server for the project you are currently working on. It assumes you have 
+<a href="http://rinari.rubyforge.org/">Rinari</a> installed.
+
+<h4>The function:</h4>
+<pre class="brush: plain">
+(defun restart-passenger ()
+  "Restart passenger using the current rinari root" (interactive)
+  (shell-command (concat "touch " (rinari-root) "tmp/restart.txt")))
+</pre>
+<h4>And to bind it to a key</h4>
+<pre class="brush: plain">
+(global-set-key (kbd "C-c ' p") 'restart-passenger)
+</pre>
+</p>
+
+     </div>
+     <div><div id="disqus_thread"></div>
+<script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>
+ 
+</div>
+
+   </div>
+
+   <div class="column span-5 append-2 last sidebar">
+     <h4>About</h4>
+     <div>
+       <img src="/images/brad_head.gif" />
+       <p>My name is Brad. I am a programmer from Sydney, Australia. I like lots of coding stuff, but especially ruby and iPhone.
+       </p>
+       <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
+     </div>
+
+     <h4>What I'm...</h4>
+     <div>
+       <ul>
+       <li><a href="http://github.com/bradx3">Working on</a></li>
+       <li><a href="http://twitter.com/bradx3">Thinking</a></li>
+       </ul>
+     </div>
+
+     <h4>Syndicate</h4>
+     <div>
+       <a href="/feed.xml">RSS</a>
+     </div>
+
+   </div>
+
+   <div class="column span-20 prepend-2 append-2 first last" id="footer">
+     <hr />
+     <p>This website was created with <a href="http://webby.rubyforge.org">Webby</a></p>
+   </div>
+
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10322890-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

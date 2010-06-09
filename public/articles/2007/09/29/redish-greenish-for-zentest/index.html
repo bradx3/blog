@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Redish Greenish for ZenTest</title>
+   <meta name="author" content="" />
+
+   <!--- Blueprint CSS Framework -->
+   <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
+
+   <!-- CodeRay syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/coderay.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/site.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+   <!-- SyntaxHighlighter -->
+   <script type="text/javascript" src="/scripts/shCore.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushBash.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushJScript.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushPlain.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushRuby.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushSql.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushXml.js"></script>
+   <link type="text/css" rel="stylesheet" href="/styles/shCore.css"/>
+   <link type="text/css" rel="stylesheet" href="/styles/shThemeDefault.css"/>
+   <script type="text/javascript">
+     SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+     SyntaxHighlighter.all();
+   </script>
+</head>
+<body>
+
+<div class="container">
+
+   <div class="column span-20 prepend-2 append-2 first last" id="header">
+     <a href="/">
+       <img src="/images/banner.gif" alt="Lucky-Dip Blog"/>
+     </a>
+   </div>
+
+   <div class="column span-15 prepend-2 first content">
+      <div class="article">
+    <h1>
+      <a href="/articles/2007/09/29/redish-greenish-for-zentest/">Redish Greenish for ZenTest</a>
+      <span class="date">
+	(2007-09-29)
+      </span>
+    </h1>
+     <div class="body">
+       <p>
+<a href="http://www.zenspider.com/ZSS/Products/ZenTest/">ZenTest</a> is a great tool. I use it and its redgreen plugin a lot to easily keep an eye on my tests.
+</p>
+
+<p>
+I use a green terminal background though, so when my tests pass, rather than a green line, I have to rely on a lack of a red line. This isn't so bad, but I thought it could be improved with a little effort.
+</p>
+
+<p>
+Redish greenish is an extension of redgreen that allows you to specify the colours used for tests passing and/or failing.
+</p>
+
+<p>
+To use it, <a href="http://blog.lucky-dip.net/files/redishgreenish.rb">save this file</a> into your autotest lib directory. (Mine is GEM_PATH/1.8/gems/ZenTest-3.6.1/lib/autotest/). To enable redishgreenish, you'll need to modify your autotest config file. Open "~/.autotest" and change the line:
+<br />
+<pre class="brush: ruby">
+require 'autotest/redgreen'
+</pre>
+<br />
+to 
+<br />
+<pre class="brush: ruby">
+require 'autotest/redishgreenish'
+</pre>
+</p>
+
+<p>
+At this point, autotest will behave exactly the same as if redgreen was used. To change the colour of the lines used to signify tests passing and failing, your autotest config file should look like
+<br />
+<pre class="brush: ruby">
+PASSED = :blue
+FAILED = :yellow
+require 'autotest/redishgreenish'
+</pre>
+</p>
+
+<p>
+Valid values for colours are
+<br />
+<pre class="brush: ruby">
+:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white
+</pre>
+</p>
+
+     </div>
+     <div><div id="disqus_thread"></div>
+<script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>
+ 
+</div>
+
+   </div>
+
+   <div class="column span-5 append-2 last sidebar">
+     <h4>About</h4>
+     <div>
+       <img src="/images/brad_head.gif" />
+       <p>My name is Brad. I am a programmer from Sydney, Australia. I like lots of coding stuff, but especially ruby and iPhone.
+       </p>
+       <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
+     </div>
+
+     <h4>What I'm...</h4>
+     <div>
+       <ul>
+       <li><a href="http://github.com/bradx3">Working on</a></li>
+       <li><a href="http://twitter.com/bradx3">Thinking</a></li>
+       </ul>
+     </div>
+
+     <h4>Syndicate</h4>
+     <div>
+       <a href="/feed.xml">RSS</a>
+     </div>
+
+   </div>
+
+   <div class="column span-20 prepend-2 append-2 first last" id="footer">
+     <hr />
+     <p>This website was created with <a href="http://webby.rubyforge.org">Webby</a></p>
+   </div>
+
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10322890-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

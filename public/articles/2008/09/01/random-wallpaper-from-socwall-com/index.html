@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Random wallpaper from socwall.com</title>
+   <meta name="author" content="" />
+
+   <!--- Blueprint CSS Framework -->
+   <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
+
+   <!-- CodeRay syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/coderay.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/site.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+   <!-- SyntaxHighlighter -->
+   <script type="text/javascript" src="/scripts/shCore.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushBash.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushJScript.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushPlain.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushRuby.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushSql.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushXml.js"></script>
+   <link type="text/css" rel="stylesheet" href="/styles/shCore.css"/>
+   <link type="text/css" rel="stylesheet" href="/styles/shThemeDefault.css"/>
+   <script type="text/javascript">
+     SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+     SyntaxHighlighter.all();
+   </script>
+</head>
+<body>
+
+<div class="container">
+
+   <div class="column span-20 prepend-2 append-2 first last" id="header">
+     <a href="/">
+       <img src="/images/banner.gif" alt="Lucky-Dip Blog"/>
+     </a>
+   </div>
+
+   <div class="column span-15 prepend-2 first content">
+      <div class="article">
+    <h1>
+      <a href="/articles/2008/09/01/random-wallpaper-from-socwall-com/">Random wallpaper from socwall.com</a>
+      <span class="date">
+	(2008-09-01)
+      </span>
+    </h1>
+     <div class="body">
+       <p>I quite like http://socwall.com. They have a rss feed for recent posts, but I wrote a small script to download a random selection instead.</p>
+<p>
+On OSX I could then set my desktop background to be a random picture from a folder. In my case that folder was /Users/brad/Pictures/Wallpapers/ but that could be easily changed.
+</p>
+<p>
+<pre class="brush: ruby">
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'hpricot'
+require 'open-uri'
+require 'Pathname'
+ 
+URL = 'http://socwall.com/browse/index.php?wpSortby=8'
+DEST = "/Users/brad/Pictures/Wallpapers/"
+
+
+def clear_old_images
+  Pathname.new(DEST).children.each { |f| f.delete }
+end
+
+def download_images(count)
+  count = count.to_i
+  
+  while count > 0
+    doc = Hpricot(open(URL))
+    
+    doc.search("div.wpThumbnail").each do |thumb|
+      next if count == 0
+      
+      thumbnail = thumb.at("img")['src']
+      image = thumbnail.gsub(/\/tb_/, '/')
+      image = image.gsub(" ", "%20")
+      
+      remote_image = open(image, 
+                          "User-Agent" => "Ruby/#{RUBY_VERSION}")
+      local_image = open("#{ DEST }/#{ count }.png", 'w')
+      local_image.write(remote_image.read)
+      
+      remote_image.close
+      local_image.close
+      
+      count -= 1
+    end
+  end
+end
+
+count = ARGV[0] || 10
+
+clear_old_images
+download_images(count)
+</pre>
+</p>
+
+     </div>
+     <div><div id="disqus_thread"></div>
+<script type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/embed.js"></script><noscript><a href="http://lucky-dipblog.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a></div>
+ 
+</div>
+
+   </div>
+
+   <div class="column span-5 append-2 last sidebar">
+     <h4>About</h4>
+     <div>
+       <img src="/images/brad_head.gif" />
+       <p>My name is Brad. I am a programmer from Sydney, Australia. I like lots of coding stuff, but especially ruby and iPhone.
+       </p>
+       <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
+     </div>
+
+     <h4>What I'm...</h4>
+     <div>
+       <ul>
+       <li><a href="http://github.com/bradx3">Working on</a></li>
+       <li><a href="http://twitter.com/bradx3">Thinking</a></li>
+       </ul>
+     </div>
+
+     <h4>Syndicate</h4>
+     <div>
+       <a href="/feed.xml">RSS</a>
+     </div>
+
+   </div>
+
+   <div class="column span-20 prepend-2 append-2 first last" id="footer">
+     <hr />
+     <p>This website was created with <a href="http://webby.rubyforge.org">Webby</a></p>
+   </div>
+
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10322890-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

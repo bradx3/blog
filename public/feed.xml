@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+   <title>Lucky-dip Blog - Lucky-dip atom feed</title>
+  <subtitle></subtitle>
+  <link href="http://blog.lucky-dip.net//" rel="self" />
+  <link href="http://blog.lucky-dip.net/" />
+  <updated>2010-06-09T20:57:33+10:00</updated>
+  <author>
+    <name>Brad Wilson</name>
+    <email>brad@lucky-dip.net</email>
+  </author>
+  <id>http://blog.lucky-dip.net/</id>
+  
+  <entry>
+    <title>Fundation</title>
+    <link href="/articles/2009/09/07/fundation/" />
+    <id>tag:blog.lucky-dip.net,2009-09-07:1252294810</id>
+    <updated>2009-09-07T13:40:10+10:00</updated>
+    <content type="html">&lt;p&gt;
+  I've kept my saving in a single, high interest account for a while now. It
+  works particularly well as a contractor in that I can put aside tax and GST
+  and earn interest on that before I have to pay it to the government.
+&lt;/p&gt;
+&lt;p&gt;
+  It has been a bit difficult to keep track of how much money was saving, and how
+  much was tax/GST though, so I've written a simple app to keep track.
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;a href=&quot;http://fundation.lucky-dip.net&quot;&gt;Fundation&lt;/a&gt; lets you set up
+  funds to manage your saving. Each paycheck can be automatically divided up
+  into the different funds in ratios you specify.
+&lt;/p&gt;
+&lt;p&gt;
+  Anyway, &lt;a href=&quot;http://fundation.lucky-dip.net&quot;&gt;Fundation&lt;/a&gt; is free to use,
+  so if you're having trouble remembering how much money you've got to spend, give it
+  a try &lt;a href=&quot;http://fundation.lucky-dip.net&quot;&gt;here&lt;/a&gt;.
+&lt;/p&gt;
+&lt;p&gt;
+  If you have any errors in Fundation, or any suggestions for improvements,
+  please use the comments of this post to provide them.
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Restart Passenger From Emacs Using Rinari</title>
+    <link href="/articles/2009/08/06/restart-passenger-from-emacs-using-rinari/" />
+    <id>tag:blog.lucky-dip.net,2009-08-06:1249532853</id>
+    <updated>2009-08-06T14:27:33+10:00</updated>
+    <content type="html">&lt;p&gt;
+Being able to completely re-program your editor is fun. I feel like I've got a 
+long way to go before I'm an Emacs Guru (if anybody *ever* becomes a true
+Emacs Guru), but it's nice being able to easily
+automate things I do in my editor.
+&lt;/p&gt;
+&lt;p&gt;
+I've been experimenting with using &lt;a href=&quot;http://www.modrails.com/&quot;&gt;Passenger&lt;/a&gt;
+in development instead of script/server. It's not too bad. It's nice to have
+a server always ready to go, but it does make dropping down to the debugger
+difficult.
+&lt;/p&gt;
+&lt;p&gt;
+Anyway, here is a small snippet of emacs lisp to easily restart the Passenger
+server for the project you are currently working on. It assumes you have 
+&lt;a href=&quot;http://rinari.rubyforge.org/&quot;&gt;Rinari&lt;/a&gt; installed.
+
+&lt;h4&gt;The function:&lt;/h4&gt;
+&lt;pre class=&quot;brush: plain&quot;&gt;
+(defun restart-passenger ()
+  &quot;Restart passenger using the current rinari root&quot; (interactive)
+  (shell-command (concat &quot;touch &quot; (rinari-root) &quot;tmp/restart.txt&quot;)))
+&lt;/pre&gt;
+&lt;h4&gt;And to bind it to a key&lt;/h4&gt;
+&lt;pre class=&quot;brush: plain&quot;&gt;
+(global-set-key (kbd &quot;C-c ' p&quot;) 'restart-passenger)
+&lt;/pre&gt;
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>My Backup Script</title>
+    <link href="/articles/2009/07/24/my-backup-script/" />
+    <id>tag:blog.lucky-dip.net,2009-07-24:1248387951</id>
+    <updated>2009-07-24T08:25:51+10:00</updated>
+    <content type="html">&lt;p&gt;
+  This is my simple backup script. It keeps everything I don't already have backed up 
+  in version control safe and sound from hardware failure. Not from me though - 
+  if I delete a file accidentally, that file is really gone
+  (unless you act fast before the next backup runs!). 
+  If I make a bad edit, that file is busted.
+  &lt;br /&gt;
+  &lt;br /&gt;
+  But I can live with that. 
+&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;h3&gt;backup.rb&lt;/h3&gt;
+  Backup.rb uses rsync over ssh to backup a number of different server. Rsync is good
+  because it only sends what changed, so we're not transferring gigs every night.
+  &lt;br /&gt;&lt;br /&gt;
+  You'll have to make some changes to the SSH_USER, REMOTE_DIR and HOSTS constants. 
+  You could also add any file types you want to ignore to the EXCLUDES list.
+
+  &lt;pre class=&quot;brush: ruby&quot;&gt;
+#!/usr/bin/env ruby
+
+NAME = %x{ hostname }.strip
+SSH_USER = &quot;brad&quot;
+REMOTE_DIR = &quot;/home/brad/Backups/#{ NAME }&quot;
+
+HOSTS = [ &quot;clamps&quot;, &quot;hubert.lucky-dip.net&quot; ]
+DIRS = [
+        &quot;~/Library&quot;, 
+        &quot;~/Documents&quot;,
+        &quot;~/Pictures&quot;
+]
+EXCLUDES = [
+            &quot;*Cache*&quot;,
+            &quot;*NewsFire*&quot;,
+            &quot;*Cookies*&quot;,
+            &quot;*.log&quot;,
+            &quot;HistoryIndex.ox*&quot;,
+            &quot;*Virtual Machines*&quot;,
+            &quot;*.resume&quot;,
+            &quot;*.ipsw&quot;,
+            &quot;*.dmg&quot;,
+            &quot;*.corrupt&quot;
+]
+
+HOSTS.each do |host|
+  DIRS.each do |dir|
+    puts &quot;--------------------------------------------&quot;
+    excludes = EXCLUDES.map { |e| &quot;--exclude \&quot;#{ e }\&quot;&quot; }.join(' ')
+    cmd = &quot;rsync -av --delete --delete-excluded &quot;
+    cmd += &quot; --rsh=\&quot;ssh -l #{ SSH_USER }\&quot; &quot;
+    cmd += &quot; #{ dir } #{ host }:#{ REMOTE_DIR } #{ excludes }&quot;
+    puts cmd
+    system(cmd)
+  end
+end
+  &lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;h3&gt;Crontab&lt;/h3&gt;
+  With the crontab below, a backup will be run every night at 10pm
+  &lt;pre class=&quot;brush: bash&quot;&gt;
+    0 22 * * * /Users/brad/projects/scripts/backup.rb
+  &lt;/pre&gt;
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Redish Greenish for ZenTest</title>
+    <link href="/articles/2007/09/29/redish-greenish-for-zentest/" />
+    <id>tag:blog.lucky-dip.net,2007-09-29:1191037140</id>
+    <updated>2007-09-29T13:39:00+10:00</updated>
+    <content type="html">&lt;p&gt;
+&lt;a href=&quot;http://www.zenspider.com/ZSS/Products/ZenTest/&quot;&gt;ZenTest&lt;/a&gt; is a great tool. I use it and its redgreen plugin a lot to easily keep an eye on my tests.
+&lt;/p&gt;
+
+&lt;p&gt;
+I use a green terminal background though, so when my tests pass, rather than a green line, I have to rely on a lack of a red line. This isn't so bad, but I thought it could be improved with a little effort.
+&lt;/p&gt;
+
+&lt;p&gt;
+Redish greenish is an extension of redgreen that allows you to specify the colours used for tests passing and/or failing.
+&lt;/p&gt;
+
+&lt;p&gt;
+To use it, &lt;a href=&quot;http://blog.lucky-dip.net/files/redishgreenish.rb&quot;&gt;save this file&lt;/a&gt; into your autotest lib directory. (Mine is GEM_PATH/1.8/gems/ZenTest-3.6.1/lib/autotest/). To enable redishgreenish, you'll need to modify your autotest config file. Open &quot;~/.autotest&quot; and change the line:
+&lt;br /&gt;
+&lt;pre class=&quot;brush: ruby&quot;&gt;
+require 'autotest/redgreen'
+&lt;/pre&gt;
+&lt;br /&gt;
+to 
+&lt;br /&gt;
+&lt;pre class=&quot;brush: ruby&quot;&gt;
+require 'autotest/redishgreenish'
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+At this point, autotest will behave exactly the same as if redgreen was used. To change the colour of the lines used to signify tests passing and failing, your autotest config file should look like
+&lt;br /&gt;
+&lt;pre class=&quot;brush: ruby&quot;&gt;
+PASSED = :blue
+FAILED = :yellow
+require 'autotest/redishgreenish'
+&lt;/pre&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Valid values for colours are
+&lt;br /&gt;
+&lt;pre class=&quot;brush: ruby&quot;&gt;
+:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white
+&lt;/pre&gt;
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Using Javascript Code for RJS Instead of IDs</title>
+    <link href="/articles/2007/11/05/using-javascript-code-for-rjs-instead-of-ids/" />
+    <id>tag:blog.lucky-dip.net,2007-11-05:1194226386</id>
+    <updated>2007-11-05T12:33:06+11:00</updated>
+    <content type="html">Some info on how to make RJS output code like:
+&lt;pre class=&quot;brush: jscript&quot;&gt;
+new Insertion.Bottom($$('p.welcome b').first(), &quot;Some item&quot;
+&lt;/pre&gt;
+&lt;p&gt;
+&lt;a href=&quot;http://sentia.com.au/2009/03/using-javascript-code-for-rjs-instead-of-ids/&quot;&gt;http://sentia.com.au/2008/03/using-javascript-code-for-rjs.html&lt;/a&gt;
+&lt;br /&gt;
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Named SQL Server Instances with FreeTDS</title>
+    <link href="/articles/2008/03/10/named-sql-server-instances-with-freetds/" />
+    <id>tag:blog.lucky-dip.net,2008-03-10:1205138037</id>
+    <updated>2008-03-10T19:33:57+11:00</updated>
+    <content type="html">&lt;p&gt;
+&lt;a href=&quot;http://permalink.gmane.org/gmane.comp.db.tds.freetds/9182&quot;&gt;A helpful post on accessing named sql server instances using freetds&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+I was having a lot of trouble doing that. Turns out the 'instance' key exists. As far as I could find it wasn't in the doc anywhere, so this is just a post in the hope that it'll save somebody else some time in the future.
+&lt;/p&gt;
+
+From the post:
+&lt;pre class=&quot;brush: plain&quot;&gt;
+[def]
+host = abc
+instance = def
+port = 1433
+client charset = UTF-8
+tds version = 8.0
+&lt;/pre&gt;
+
+
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Read table row-by-row in ruby</title>
+    <link href="/articles/2008/03/12/read-table-row-by-row-in-ruby/" />
+    <id>tag:blog.lucky-dip.net,2008-03-12:1205283915</id>
+    <updated>2008-03-12T12:05:15+11:00</updated>
+    <content type="html">&lt;p&gt;
+I needed to export some data from a huge data table. Iterating through MyModel.find took too long and too much ram, so I went straight to the db instead. 
+&lt;/p&gt;
+
+Example code was tough to find, so here's an example:
+
+&lt;pre class=&quot;brush: ruby&quot;&gt;
+sql = &quot;select * from #{ MyModel.table_name }&quot;
+MyModel.connection.execute(sql) do |handle|
+  handle.fetch do |row|
+    # row is an array of values
+    ... export row ...
+  end
+end
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>performSelector in RubyCocoa</title>
+    <link href="/articles/2008/04/22/performselector-in-rubycocoa/" />
+    <id>tag:blog.lucky-dip.net,2008-04-22:1208840661</id>
+    <updated>2008-04-22T15:04:21+10:00</updated>
+    <content type="html">&lt;p&gt;
+I had a lot of trouble finding documentation for this. If you want to make a call on the main thread in RubyCocoa, the format is something like:
+&lt;/p&gt;
+&lt;pre class=&quot;brush: ruby&quot;&gt;
+performSelectorOnMainThread_withObject_waitUntilDone('method_name:', object, true)
+&lt;/pre&gt;
+
+&lt;p&gt;
+So two things that took me a while:
+&lt;ol&gt;
+&lt;li&gt;method_name has a trailing colon. &lt;/li&gt;
+&lt;li&gt;The object the has the method you want to call should be the second argument. I got it in my head it should be the first for some reason.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Random wallpaper from socwall.com</title>
+    <link href="/articles/2008/09/01/random-wallpaper-from-socwall-com/" />
+    <id>tag:blog.lucky-dip.net,2008-09-01:1220256870</id>
+    <updated>2008-09-01T18:14:30+10:00</updated>
+    <content type="html">&lt;p&gt;I quite like http://socwall.com. They have a rss feed for recent posts, but I wrote a small script to download a random selection instead.&lt;/p&gt;
+&lt;p&gt;
+On OSX I could then set my desktop background to be a random picture from a folder. In my case that folder was /Users/brad/Pictures/Wallpapers/ but that could be easily changed.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;pre class=&quot;brush: ruby&quot;&gt;
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'hpricot'
+require 'open-uri'
+require 'Pathname'
+ 
+URL = 'http://socwall.com/browse/index.php?wpSortby=8'
+DEST = &quot;/Users/brad/Pictures/Wallpapers/&quot;
+
+
+def clear_old_images
+  Pathname.new(DEST).children.each { |f| f.delete }
+end
+
+def download_images(count)
+  count = count.to_i
+  
+  while count &gt; 0
+    doc = Hpricot(open(URL))
+    
+    doc.search(&quot;div.wpThumbnail&quot;).each do |thumb|
+      next if count == 0
+      
+      thumbnail = thumb.at(&quot;img&quot;)['src']
+      image = thumbnail.gsub(/\/tb_/, '/')
+      image = image.gsub(&quot; &quot;, &quot;%20&quot;)
+      
+      remote_image = open(image, 
+                          &quot;User-Agent&quot; =&gt; &quot;Ruby/#{RUBY_VERSION}&quot;)
+      local_image = open(&quot;#{ DEST }/#{ count }.png&quot;, 'w')
+      local_image.write(remote_image.read)
+      
+      remote_image.close
+      local_image.close
+      
+      count -= 1
+    end
+  end
+end
+
+count = ARGV[0] || 10
+
+clear_old_images
+download_images(count)
+&lt;/pre&gt;
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Element.insert, Prototype and named anchors</title>
+    <link href="/articles/2008/11/25/element-insert-prototype-and-named-anchors/" />
+    <id>tag:blog.lucky-dip.net,2008-11-25:1227573971</id>
+    <updated>2008-11-25T11:46:11+11:00</updated>
+    <content type="html">&lt;p&gt;This was a strange one.&lt;/p&gt;
+
+&lt;p&gt;
+HTML:
+&lt;pre class=&quot;brush: xml&quot;&gt;
+&amp;lt;a name=&quot;questions&quot;&amp;gt;
+&amp;lt;div class=&quot;questions&quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;
+JS:
+&lt;pre class=&quot;brush: jscript&quot;&gt;
+Element.insert(&quot;questions&quot;, { bottom : &quot;&amp;lt;div&amp;gt;Test&amp;lt;/div&amp;gt;&quot; })
+&lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;
+With that setup, IE compains and says &quot;Invalid source HTML for this operation&quot;. It turns out that prototype was trying to put the div into the a tag. I guess I can see how it happened, but I sure didn't expect it. 
+&lt;/p&gt;
+&lt;p&gt;
+Anyway I removed the a tag completely and everything works fine. Weird.
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Kill All Rinari Buffers in Emacs</title>
+    <link href="/articles/2009/03/30/kill-all-rinari-buffers-in-emacs/" />
+    <id>tag:blog.lucky-dip.net,2009-03-30:1238391234</id>
+    <updated>2009-03-30T16:33:54+11:00</updated>
+    <content type="html">&lt;p&gt;
+I've been using Emacs for development for a few months now and am pretty happy with it. 
+&lt;/p&gt;
+&lt;p&gt;
+I use the Rinari mode to provide some help when I'm working on Rails projects. Once I'm finished for the day (or changing
+to another project, I used to use the kill-some-buffers command and go through them one by one.
+&lt;/p&gt;
+&lt;p&gt;
+Here's some elisp that I've written and put in my .emacs file that just kills all buffers that link to files
+that are in the current rinari-root. It's probably not perfect, but it seems to work most of the time.
+&lt;/p&gt;
+&lt;pre class=&quot;brush: plain&quot;&gt;
+;; some rinari helpers
+(defun kill-buffers-in-subdir (subdir buffer)
+  &quot;Kills the given buffer if it is linked to a file in the current rinari project.&quot;
+  (if (buffer-in-subdir-p subdir buffer)
+     (kill-buffer buffer)))
+
+(defun buffer-in-subdir-p (subdir buffer) 
+  &quot;Returns true if buffer belongs to the current rinari project&quot;
+  (and (buffer-file-name buffer)
+       (string-match subdir (buffer-file-name buffer))))
+
+(defun kill-all-rinari-buffers ()
+  &quot;Kills all buffers linked to the current rinari project&quot;
+  (interactive)
+  (let ((path (rinari-root)))
+    (if path
+	(dolist (buffer (buffer-list))
+	  (kill-buffers-in-subdir path buffer)))))
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Creating a jruby rails project</title>
+    <link href="/articles/2009/07/10/creating-a-jruby-rails-project/" />
+    <id>tag:blog.lucky-dip.net,2009-07-10:1247177306</id>
+    <updated>2009-07-10T08:08:26+10:00</updated>
+    <content type="html">&lt;p&gt;
+For some reason, this command:
+&lt;pre class=&quot;brush: bash&quot;&gt;
+jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails
+&lt;/pre&gt;
+didn't install all the required gems I needed.
+&lt;/p&gt;
+&lt;p&gt;
+Manually listing all the basic rails gems needed fixed the problem for me though. Working command:
+&lt;pre class=&quot;brush: bash&quot;&gt;
+jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails \
+activesupport actionmailer activerecord actionpack activeresource
+&lt;/pre&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Omniweb Using Webkit From Safari 4</title>
+    <link href="/articles/2009/03/12/omniweb-using-webkit4/" />
+    <id>tag:blog.lucky-dip.net,2009-03-12:1236818841</id>
+    <updated>2009-03-12T11:47:21+11:00</updated>
+    <content type="html">&lt;p&gt;
+  I'm a big fan of the &lt;a href=&quot;http://www.omnigroup.com/applications/omniweb&quot;&gt;Omniweb&lt;/a&gt; web browser. I've had some problems with it being a bit slow in the past, but that seems to have been fixed with the latest &lt;a href=&quot;http://www.omnigroup.com/applications/omniweb/download/sneakypeek&quot;&gt;Nightly Builds&lt;/a&gt;. The latest build has brought in the same Webkit as used by Safari 4, so it's fast. Really fast.
+&lt;/p&gt;
+&lt;p&gt; 
+  Add that to all the features I like, and I'm a happy web browser. Things I miss when I'm not using Omniweb.
+  &lt;ul&gt;
+    &lt;li&gt;Vertical Tab Bar - I have a wide screen, and a lot of tabs open&lt;/li&gt;
+    &lt;li&gt;Workspaces - I can put my house hunting links in one workspace, then keep them handy, but hide them while I work&lt;/li&gt;
+    &lt;li&gt;Mac (?) font rendering. Something about Firefox's font just looks wrong&lt;/li&gt;
+    &lt;li&gt;Built in ad-blocking. It's no Adblock Plus, but I don't mind seeing ads. It's just the flashing ones I hate&lt;/li&gt;
+    &lt;li&gt;Location bar hides, shows when I hit Apple-L, then hides again. I don't know what I'm doing wrong on other browsers, but I can never get this to work reliably.&lt;/li&gt;
+    &lt;li&gt;And heaps more...&lt;/li&gt;
+  &lt;/ul&gt;
+  It's a good browser. It's good enough I paid for it, but it's free now. Nice one OmniGroup.
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Blog Running on Webby</title>
+    <link href="/articles/2009/02/19/blog-running-on-webby/" />
+    <id>tag:blog.lucky-dip.net,2009-02-19:1235013912</id>
+    <updated>2009-02-19T14:25:12+11:00</updated>
+    <content type="html">&lt;p&gt;
+  The server this blog runs on hosts a few things for - email, a few sites and some git repositories. It's got 512mb or ram, but rubygems and even git can get pretty greedy at times. I finally had enough.
+&lt;/p&gt;
+&lt;p&gt;
+  Typo and mysql were only being used for the blog and were taking up a heap or ram. I looked around and &lt;a href=&quot;http://webby.rubyforge.org/&quot;&gt;Webby&lt;/a&gt; seemed a good fit. 
+&lt;/p&gt;
+&lt;p&gt;
+  I've managed to convert the old articles and comments to Webby and Disqus format. There's currently some problems with the comments not displaying, so I'll have to fix that, but I can live with that for now.
+&lt;/p&gt;
+&lt;p&gt;
+  Anyway if anybody notices any problems, please leave a comment and I'll get it fixed up. Unless it's a problem posting comments. 
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;strong&gt;
+    Update: Comments are display fine now. Wooh.
+  &lt;/strong&gt;
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Haml &amp; Sass Editors 0.5.4</title>
+    <link href="/articles/2007/07/06/haml-sass-editors-0-5-4/" />
+    <id>tag:blog.lucky-dip.net,2007-07-06:1183695941</id>
+    <updated>2007-07-06T14:25:41+10:00</updated>
+    <content type="html">&lt;p&gt;&lt;strong&gt;These editors have been merged into the &lt;a href=&quot;http://aptana.com/&quot;&gt;Aptana&lt;/a&gt; project. Please don't post any error reports here.&lt;/strong&gt;&lt;/p&gt; 
+&lt;p&gt;Last release didn't go so well. For some reason I figured other people had tried to install Aptana, had it fail and then given up on it like me. Turns out I was alone haha.&lt;/p&gt;
+
+&lt;p&gt;
+So I spent a bit of time figuring out what changed in RDT and fixed things up. I've tested this with a straight out of the box install of Aptana m8, so hopefully it'll work for others too.&lt;/p&gt;
+
+&lt;p&gt;
+If anybody does try it, please let me know if it works or not. I'm going to use this blog post as a bit of a test before I post to the Haml mail list. Thanks in advance to anyone who replies!&lt;/p&gt;
+
+&lt;p&gt;
+(Oh yeah, the update site is still http://haml.lucky-dip.net/).
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Haml &amp; Sass Editor For Eclipse</title>
+    <link href="/articles/2007/06/21/haml-sass-editor-for-radrails/" />
+    <id>tag:blog.lucky-dip.net,2007-06-21:1182416325</id>
+    <updated>2007-06-21T18:58:45+10:00</updated>
+    <content type="html">&lt;p&gt;&lt;strong&gt;These editors have been merged into the &lt;a href=&quot;http://aptana.com/&quot;&gt;Aptana&lt;/a&gt; project. Please don't post any error reports here.&lt;/strong&gt;&lt;/p&gt; 
+&lt;p&gt;
+I did some very basic editors for Haml and Sass a while back. At the time I was interested in Haml. It's elegant to write, and the automatically formatted html it outputs just made it a match made in heaven.
+&lt;/p&gt;
+&lt;p&gt;
+Fast forward a few months and now I'm actually using Haml and Sass. It's as good as I ever hoped it would be. With Haml and a little bit of FormBuilder magic I'm making useful forms in four short lines. Too good.
+&lt;/p&gt;
+&lt;p&gt;
+Anyway coming with using it is the chance to see some shortcomings in my own editors, so I've spent a bit of time updating them. I've set up a proper Eclipse update site, so you can just add 'http://haml.lucky-dip.net' via the 'Help - Software Updates - Find and Install' menu option. That should help minimize a few errors with the various versions of Eclipse and RDT around. All references to the RadRails plugins have been removed. There was a bit of code that I pulled into my plugin, but with RadRails/Aptana in heavy dev it's easier for me to forget about trying to keep up for a while.
+&lt;/p&gt;
+&lt;p&gt;
+Also added is code folding. There's a bit of work still to do on this one. You can currently only fold top level elements. This can be a pain when you've got all your code in one file, but if you're using layouts and partial in a sensible way it should hopefully be of some use. 
+&lt;/p&gt;
+&lt;p&gt;
+One thing I found a bit tricky was figuring out which element I was under when I was editing. Some people might like turning on space markers (can you actually do that in Eclipse?), but I figured a character matcher would do the trick. So now as you move around in the editors there'll be a blue box around the element you are currently in. At the moment it just highlights the first letter of the element. I'm going to see if I can get the whole element happening for the next release.
+&lt;/p&gt;
+&lt;p&gt;
+So I hope it works well for people. Set up an Eclipse update site of 'http://haml.lucky-dip.net' and that should keep you informed as new versions come out.
+&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Time To Go</title>
+    <link href="/articles/2009/02/10/time-to-go/" />
+    <id>tag:blog.lucky-dip.net,2009-02-10:1234216565</id>
+    <updated>2009-02-10T08:56:05+11:00</updated>
+    <content type="html">&lt;p&gt;I've just released my first iPhone application.&lt;/p&gt;
+
+&lt;p&gt;Time To Go is designed to be the quickest way to tell when the train you need to catch leaves. I use it just before I leave work to know whether I need to run to the station to catch the next train.&lt;/p&gt;
+
+&lt;p&gt;There'll be a dedicated page up to log any timetable errors soon, but for now please leave any errors or suggestions in the comments for this blog post.&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href=&quot;http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=304313690&amp;mt=8&quot;&gt;iTunes Store URL&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;
+Screenshot:&lt;br /&gt;&lt;br /&gt;
+&lt;a href=&quot;http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=304313690&amp;mt=8&quot;&gt;&lt;img src=&quot;/images/screenshot.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>ZSH</title>
+    <link href="/articles/2008/06/27/zsh/" />
+    <id>tag:blog.lucky-dip.net,2008-06-27:1214539580</id>
+    <updated>2008-06-27T14:06:20+10:00</updated>
+    <content type="html">&lt;p&gt;I've been zsh lately. I get the feeling most shells have similar features, but somehow I stumbled across a good config file for this one. It's so good I think it is worth sharing.&lt;/p&gt;
+
+&lt;p&gt;
+Features that I like in zsh:
+&lt;ul&gt;
+&lt;li&gt;Standard aliases, reverse search, history work as normal&lt;/i&gt;
+&lt;li&gt;Typos in command names and directories are fixed automatically&lt;/li&gt;
+&lt;li&gt;Auto 'cd' if you just type the directory name.&lt;/li&gt;
+&lt;li&gt;Completion of command options (so the - and -- options!)&lt;/li&gt;
+&lt;li&gt;Copletion of rake task names. This might the same as above, but it's still handy.&lt;/li&gt;
+&lt;li&gt;Completion of remote paths over scp. It's a bit slow for regular use, but can be good if you've forgotten the name of one dir.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+My zshrc is available here on github:
+&lt;a href=&quot;http://github.com/bradx3/dotfiles/tree/master/.zshrc&quot;&gt;http://github.com/bradx3/dotfiles/tree/master/.zshrc&lt;/a&gt;
+&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Badged Dock Icon for IPhone XCode development</title>
+    <link href="/articles/2009/01/21/badged-dock-icon-for-iphone-xcode-development/" />
+    <id>tag:blog.lucky-dip.net,2009-01-21:1232497227</id>
+    <updated>2009-01-21T11:20:27+11:00</updated>
+    <content type="html">&lt;p&gt;&lt;a href=&quot;http://twitter.com/drnic&quot;&gt;Dr Nic&lt;/a&gt; made a good suggestion on Twitter for a way to badge the XCode icon with the one currently in use.&lt;/p&gt;
+
+&lt;p&gt;
+Here's my attempt:
+&lt;a href=&quot;http://gist.github.com/49767&quot;&gt;http://gist.github.com/49767&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;It relies on ImageMagick being installed (port install ImageMagick) and should be run from the project's directorin in the terminal.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+</feed>

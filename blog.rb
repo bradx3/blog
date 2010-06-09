@@ -2,8 +2,7 @@ require "rubygems"
 require "sinatra"
 
 
-DIR = File.join(File.dirname(__FILE__), '/output')
-
+DIR = 'public'
 set :public, DIR
 
 get '/' do

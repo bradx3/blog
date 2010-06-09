@@ -1,11 +1,4 @@
-SITE.user = "brad"
-SITE.host = 'hubert.lucky-dip.net'
-SITE.remote_dir = "/var/www/blog/"
 SITE.blog_dir = "articles"
+SITE.output_dir = "public"
 
 task :default => :build
-
-desc 'deploy the site to the webserver'
-task :deploy => [:build, 'deploy:rsync']
-
-# EOF
