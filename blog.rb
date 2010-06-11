@@ -1,7 +1,6 @@
 require "rubygems"
 require "sinatra"
 
-
 DIR = 'public'
 set :public, DIR
 

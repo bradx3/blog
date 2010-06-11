@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>6</title>
+   <meta name="author" content="" />
+
+   <!--- Blueprint CSS Framework -->
+   <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
+
+   <!-- CodeRay syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/coderay.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/site.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+   <!-- SyntaxHighlighter -->
+   <script type="text/javascript" src="/scripts/shCore.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushBash.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushJScript.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushPlain.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushRuby.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushSql.js"></script>
+   <script type="text/javascript" src="/scripts/shBrushXml.js"></script>
+   <link type="text/css" rel="stylesheet" href="/styles/shCore.css"/>
+   <link type="text/css" rel="stylesheet" href="/styles/shThemeDefault.css"/>
+   <script type="text/javascript">
+     SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+     SyntaxHighlighter.all();
+   </script>
+</head>
+<body>
+
+<div class="container">
+
+   <div class="column span-20 prepend-2 append-2 first last" id="header">
+     <a href="/">
+       <img src="/images/banner.gif" alt="Lucky-Dip Blog"/>
+     </a>
+   </div>
+
+   <div class="column span-15 prepend-2 first content">
+      <h2>6</h2>
+
+<div class="article">
+  <h1><a href="/articles/2010/06/11/webby-on-heroku/">Webby on Heroku</a><span class="date">(2010-06-11)</span></h1>
+
+  <div class="body">
+    <h3>The $20 a month more for beer dream</h3>
+<p>
+  I've been hosting this blog on Slicehost for a while now. They have been a
+  good host, but a full slice is more than I need these days.
+</p>
+
+<h3>The plan</h3>
+<p>
+  After a bit of thinking, I realised I could pretty easily move this blog
+  across to Heroku. It's just a bunch of static files created by 
+  <a href="http://webby.rubyforge.org/">Webby</a>, so I figured a tiny
+  <a href="http://www.sinatrarb.com/">Sinatra</a> app would be just the trick.
+</p>
+
+<h3>The problem</h3>
+<p>
+  Sinatra is perfect for these kind of tiny jobs, and ended up working without
+  too much effort. I had a bit of a wrestle with Heroku initially. 
+  I couldn't seem to get heroku to read my articles. They were stored in a
+  directory called "output". 
+</p>
+
+<h3>The solution</h3>
+<p>
+  After a while, I tried tried renaming the directory to "public". That 
+  seemed to do the trick. Heroku mentions that you can <i>read</i> the filesystem
+  but I couldn't find too much mention of exactly <i>what</i> you can read.
+  A directory called "public" seems like a pretty safe bet to be readable forever 
+  though.
+  I told Webby to start buiding to the public directory instead. Here's my 
+  SiteFile:
+  <pre>SITE.blog_dir = "articles"
+SITE.output_dir = "public"</pre>
+</p>
+  
+<h3>The app</h3>
+<p>
+  After getting that working, the script worked on Heroku. It's just as 
+  simple as I'd hoped it would be. 
+  <pre class="brush: ruby">require "rubygems"
+require "sinatra"
+
+DIR = 'public'
+set :public, DIR
+
+get '/' do
+  read('index.html')
+end
+
+get '/articles/*' do
+  read('articles', params["splat"], 'index.html')
+end
+
+def read(*parts)
+  File.read(File.join([ DIR ] + parts))
+end</pre>
+</p>
+<p>
+  Not much to it - read index.html for the root path, or read the article 
+  page for any article. It'd probably be possible to merge these into a single
+  route, but it seems like that would just complicate things unecessarily. 
+</p>
+<h3>The source</h3>
+<p>
+  <a href="http://github.com/bradx3/blog">http://github.com/bradx3/blog</a>
+</p>
+
+  </div>
+</div>
+
+   </div>
+
+   <div class="column span-5 append-2 last sidebar">
+     <h4>About</h4>
+     <div>
+       <img src="/images/brad_head.gif" />
+       <p>My name is Brad. I am a programmer from Sydney, Australia. I like lots of coding stuff, but especially ruby and iPhone.
+       </p>
+       <p>I am available for contracting work. Contact me at brad at lucky-dip.net</p>
+     </div>
+
+     <h4>What I'm...</h4>
+     <div>
+       <ul>
+       <li><a href="http://github.com/bradx3">Working on</a></li>
+       <li><a href="http://twitter.com/bradx3">Thinking</a></li>
+       </ul>
+     </div>
+
+     <h4>Syndicate</h4>
+     <div>
+       <a href="/feed.xml">RSS</a>
+     </div>
+
+   </div>
+
+   <div class="column span-20 prepend-2 append-2 first last" id="footer">
+     <hr />
+     <p>This website was created with <a href="http://webby.rubyforge.org">Webby</a></p>
+   </div>
+
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10322890-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+</html>

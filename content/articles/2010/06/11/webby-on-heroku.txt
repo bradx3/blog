@@ -1,0 +1,74 @@
+--- 
+title:      Webby on Heroku
+created_at: 2010-06-11 17:48:47.852907 +10:00
+blog_post:  true
+layout: blog/post
+filter:
+  - erb
+--- 
+<h3>The $20 a month more for beer dream</h3>
+<p>
+  I've been hosting this blog on Slicehost for a while now. They have been a
+  good host, but a full slice is more than I need these days.
+</p>
+
+<h3>The plan</h3>
+<p>
+  After a bit of thinking, I realised I could pretty easily move this blog
+  across to Heroku. It's just a bunch of static files created by 
+  <a href="http://webby.rubyforge.org/">Webby</a>, so I figured a tiny
+  <a href="http://www.sinatrarb.com/">Sinatra</a> app would be just the trick.
+</p>
+
+<h3>The problem</h3>
+<p>
+  Sinatra is perfect for these kind of tiny jobs, and ended up working without
+  too much effort. I had a bit of a wrestle with Heroku initially. 
+  I couldn't seem to get heroku to read my articles. They were stored in a
+  directory called "output". 
+</p>
+
+<h3>The solution</h3>
+<p>
+  After a while, I tried tried renaming the directory to "public". That 
+  seemed to do the trick. Heroku mentions that you can <i>read</i> the filesystem
+  but I couldn't find too much mention of exactly <i>what</i> you can read.
+  A directory called "public" seems like a pretty safe bet to be readable forever 
+  though.
+  I told Webby to start buiding to the public directory instead. Here's my 
+  SiteFile:
+  <pre>SITE.blog_dir = "articles"
+SITE.output_dir = "public"</pre>
+</p>
+  
+<h3>The app</h3>
+<p>
+  After getting that working, the script worked on Heroku. It's just as 
+  simple as I'd hoped it would be. 
+  <pre class="brush: ruby">require "rubygems"
+require "sinatra"
+
+DIR = 'public'
+set :public, DIR
+
+get '/' do
+  read('index.html')
+end
+
+get '/articles/*' do
+  read('articles', params["splat"], 'index.html')
+end
+
+def read(*parts)
+  File.read(File.join([ DIR ] + parts))
+end</pre>
+</p>
+<p>
+  Not much to it - read index.html for the root path, or read the article 
+  page for any article. It'd probably be possible to merge these into a single
+  route, but it seems like that would just complicate things unecessarily. 
+</p>
+<h3>The source</h3>
+<p>
+  <a href="http://github.com/bradx3/blog">http://github.com/bradx3/blog</a>
+</p>

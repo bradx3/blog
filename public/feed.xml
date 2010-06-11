@@ -4,12 +4,86 @@
   <subtitle></subtitle>
   <link href="http://blog.lucky-dip.net//" rel="self" />
   <link href="http://blog.lucky-dip.net/" />
-  <updated>2010-06-09T20:57:33+10:00</updated>
+  <updated>2010-06-12T09:22:27+10:00</updated>
   <author>
     <name>Brad Wilson</name>
     <email>brad@lucky-dip.net</email>
   </author>
   <id>http://blog.lucky-dip.net/</id>
+  
+  <entry>
+    <title>Webby on Heroku</title>
+    <link href="/articles/2010/06/11/webby-on-heroku/" />
+    <id>tag:blog.lucky-dip.net,2010-06-11:1276242527</id>
+    <updated>2010-06-11T17:48:47+10:00</updated>
+    <content type="html">&lt;h3&gt;The $20 a month more for beer dream&lt;/h3&gt;
+&lt;p&gt;
+  I've been hosting this blog on Slicehost for a while now. They have been a
+  good host, but a full slice is more than I need these days.
+&lt;/p&gt;
+
+&lt;h3&gt;The plan&lt;/h3&gt;
+&lt;p&gt;
+  After a bit of thinking, I realised I could pretty easily move this blog
+  across to Heroku. It's just a bunch of static files created by 
+  &lt;a href=&quot;http://webby.rubyforge.org/&quot;&gt;Webby&lt;/a&gt;, so I figured a tiny
+  &lt;a href=&quot;http://www.sinatrarb.com/&quot;&gt;Sinatra&lt;/a&gt; app would be just the trick.
+&lt;/p&gt;
+
+&lt;h3&gt;The problem&lt;/h3&gt;
+&lt;p&gt;
+  Sinatra is perfect for these kind of tiny jobs, and ended up working without
+  too much effort. I had a bit of a wrestle with Heroku initially. 
+  I couldn't seem to get heroku to read my articles. They were stored in a
+  directory called &quot;output&quot;. 
+&lt;/p&gt;
+
+&lt;h3&gt;The solution&lt;/h3&gt;
+&lt;p&gt;
+  After a while, I tried tried renaming the directory to &quot;public&quot;. That 
+  seemed to do the trick. Heroku mentions that you can &lt;i&gt;read&lt;/i&gt; the filesystem
+  but I couldn't find too much mention of exactly &lt;i&gt;what&lt;/i&gt; you can read.
+  A directory called &quot;public&quot; seems like a pretty safe bet to be readable forever 
+  though.
+  I told Webby to start buiding to the public directory instead. Here's my 
+  SiteFile:
+  &lt;pre&gt;SITE.blog_dir = &quot;articles&quot;
+SITE.output_dir = &quot;public&quot;&lt;/pre&gt;
+&lt;/p&gt;
+  
+&lt;h3&gt;The app&lt;/h3&gt;
+&lt;p&gt;
+  After getting that working, the script worked on Heroku. It's just as 
+  simple as I'd hoped it would be. 
+  &lt;pre class=&quot;brush: ruby&quot;&gt;require &quot;rubygems&quot;
+require &quot;sinatra&quot;
+
+DIR = 'public'
+set :public, DIR
+
+get '/' do
+  read('index.html')
+end
+
+get '/articles/*' do
+  read('articles', params[&quot;splat&quot;], 'index.html')
+end
+
+def read(*parts)
+  File.read(File.join([ DIR ] + parts))
+end&lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  Not much to it - read index.html for the root path, or read the article 
+  page for any article. It'd probably be possible to merge these into a single
+  route, but it seems like that would just complicate things unecessarily. 
+&lt;/p&gt;
+&lt;h3&gt;The source&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&quot;http://github.com/bradx3/blog&quot;&gt;http://github.com/bradx3/blog&lt;/a&gt;
+&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Fundation</title>
