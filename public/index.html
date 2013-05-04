@@ -46,6 +46,52 @@
    <div class="column span-15 prepend-2 first content">
         <div class="article">
     <h1>
+      <a href="/articles/2013/05/04/dynamic-sites-on-nginx-with-passenger/">Dynamic Sites on Nginx With Passenger</a>
+      <span class="date">
+	(2013-05-04)
+      </span>
+    </h1>
+    <div class="body">
+      <p>
+  If you are using passenger with nginx, it's possible to set nginx up in a way that
+  allows new apps (or branches of the same app) to be deployed with no change to the
+  server config.
+</p>
+<p>
+  <h3>Step 1</h3>
+  Add this config to your nginx.conf. Edit the hostname to match your server, and
+  the root to match your deploy directory
+  <pre>server {
+   server_name ~^([-\w]+)\.yourdomain.com;
+   root /var/www/$1/current/public;
+   passenger_enabled on;
+}</pre>
+</p>
+<p>
+  <h3>Step 2</h3>
+  Deploy your rails app to /var/www/whatever/current. The app will then be available
+  at http://whatever.yourdomain.com.
+  <br/><br/>
+  Similarly, deploying to /var/www/some-internal-app/current means the app will be available at
+  http://some-internal-app.yourdomain.com
+</p>
+<p>
+  <h3>Notes</h3>
+  This technique probably isn't ideal for production sites, but for internal and or
+  temporary sites it is quite useful. Passenger takes care of spinning up apps as they
+  are requested, so if one app is getting lots of requests, passenger will naturally
+  spin up more app servers for that one, potentially spinning down unused apps. Providing
+  all apps aren't being constantly accessed, this acts as a kind of resource balancing
+  allowing an underpowered internal server to serve a lot of apps.
+</p>
+
+    </div>
+    <div class="comments">
+      <a href="/articles/2013/05/04/dynamic-sites-on-nginx-with-passenger/#disqus_thread">Comments</a>
+    </div>
+  </div>
+  <div class="article">
+    <h1>
       <a href="/articles/2010/06/11/webby-on-heroku/">Webby on Heroku</a>
       <span class="date">
 	(2010-06-11)

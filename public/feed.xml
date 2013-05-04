@@ -4,12 +4,52 @@
   <subtitle></subtitle>
   <link href="http://blog.lucky-dip.net//" rel="self" />
   <link href="http://blog.lucky-dip.net/" />
-  <updated>2010-10-22T20:13:32+11:00</updated>
+  <updated>2013-05-04T14:33:26+10:00</updated>
   <author>
     <name>Brad Wilson</name>
     <email>brad@lucky-dip.net</email>
   </author>
   <id>http://blog.lucky-dip.net/</id>
+  
+  <entry>
+    <title>Dynamic Sites on Nginx With Passenger</title>
+    <link href="/articles/2013/05/04/dynamic-sites-on-nginx-with-passenger/" />
+    <id>tag:blog.lucky-dip.net,2013-05-04:1367641582</id>
+    <updated>2013-05-04T14:26:22+10:00</updated>
+    <content type="html">&lt;p&gt;
+  If you are using passenger with nginx, it's possible to set nginx up in a way that
+  allows new apps (or branches of the same app) to be deployed with no change to the
+  server config.
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;h3&gt;Step 1&lt;/h3&gt;
+  Add this config to your nginx.conf. Edit the hostname to match your server, and
+  the root to match your deploy directory
+  &lt;pre&gt;server {
+   server_name ~^([-\w]+)\.yourdomain.com;
+   root /var/www/$1/current/public;
+   passenger_enabled on;
+}&lt;/pre&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;h3&gt;Step 2&lt;/h3&gt;
+  Deploy your rails app to /var/www/whatever/current. The app will then be available
+  at http://whatever.yourdomain.com.
+  &lt;br/&gt;&lt;br/&gt;
+  Similarly, deploying to /var/www/some-internal-app/current means the app will be available at
+  http://some-internal-app.yourdomain.com
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;h3&gt;Notes&lt;/h3&gt;
+  This technique probably isn't ideal for production sites, but for internal and or
+  temporary sites it is quite useful. Passenger takes care of spinning up apps as they
+  are requested, so if one app is getting lots of requests, passenger will naturally
+  spin up more app servers for that one, potentially spinning down unused apps. Providing
+  all apps aren't being constantly accessed, this acts as a kind of resource balancing
+  allowing an underpowered internal server to serve a lot of apps.
+&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Webby on Heroku</title>
@@ -632,6 +672,23 @@ Screenshot:&lt;br /&gt;&lt;br /&gt;
   </entry>
   
   <entry>
+    <title>Badged Dock Icon for IPhone XCode development</title>
+    <link href="/articles/2009/01/21/badged-dock-icon-for-iphone-xcode-development/" />
+    <id>tag:blog.lucky-dip.net,2009-01-21:1232497227</id>
+    <updated>2009-01-21T11:20:27+11:00</updated>
+    <content type="html">&lt;p&gt;&lt;a href=&quot;http://twitter.com/drnic&quot;&gt;Dr Nic&lt;/a&gt; made a good suggestion on Twitter for a way to badge the XCode icon with the one currently in use.&lt;/p&gt;
+
+&lt;p&gt;
+Here's my attempt:
+&lt;a href=&quot;http://gist.github.com/49767&quot;&gt;http://gist.github.com/49767&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;It relies on ImageMagick being installed (port install ImageMagick) and should be run from the project's directorin in the terminal.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
     <title>ZSH</title>
     <link href="/articles/2008/06/27/zsh/" />
     <id>tag:blog.lucky-dip.net,2008-06-27:1214539580</id>
@@ -654,23 +711,6 @@ Features that I like in zsh:
 My zshrc is available here on github:
 &lt;a href=&quot;http://github.com/bradx3/dotfiles/tree/master/.zshrc&quot;&gt;http://github.com/bradx3/dotfiles/tree/master/.zshrc&lt;/a&gt;
 &lt;/p&gt;</content>
-  </entry>
-  
-  <entry>
-    <title>Badged Dock Icon for IPhone XCode development</title>
-    <link href="/articles/2009/01/21/badged-dock-icon-for-iphone-xcode-development/" />
-    <id>tag:blog.lucky-dip.net,2009-01-21:1232497227</id>
-    <updated>2009-01-21T11:20:27+11:00</updated>
-    <content type="html">&lt;p&gt;&lt;a href=&quot;http://twitter.com/drnic&quot;&gt;Dr Nic&lt;/a&gt; made a good suggestion on Twitter for a way to badge the XCode icon with the one currently in use.&lt;/p&gt;
-
-&lt;p&gt;
-Here's my attempt:
-&lt;a href=&quot;http://gist.github.com/49767&quot;&gt;http://gist.github.com/49767&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;p&gt;It relies on ImageMagick being installed (port install ImageMagick) and should be run from the project's directorin in the terminal.&lt;/p&gt;
-
-</content>
   </entry>
   
 </feed>
