@@ -1,5 +1,5 @@
 --- 
-title:      Mongo-Is-Mental
+title:      MongoDB  Is Mental
 created_at: 2013-09-28 12:02:29.462012 +10:00
 blog_post:  true
 layout: blog/post
