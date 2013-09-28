@@ -4,12 +4,71 @@
   <subtitle></subtitle>
   <link href="http://blog.lucky-dip.net//" rel="self" />
   <link href="http://blog.lucky-dip.net/" />
-  <updated>2013-05-04T14:33:26+10:00</updated>
+  <updated>2013-09-28T12:06:16+10:00</updated>
   <author>
     <name>Brad Wilson</name>
     <email>brad@lucky-dip.net</email>
   </author>
   <id>http://blog.lucky-dip.net/</id>
+  
+  <entry>
+    <title>Mongo-Is-Mental</title>
+    <link href="/articles/2013/09/28/mongo-is-mental/" />
+    <id>tag:blog.lucky-dip.net,2013-09-28:1380333749</id>
+    <updated>2013-09-28T12:02:29+10:00</updated>
+    <content type="html">&lt;h3&gt;Pro tip: MongoDB cursors return duplicate records&lt;/h3&gt;
+
+&lt;p&gt;If you are iterating through a data set, you should switch from:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Object.each { |o| ... }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Object.extras(hint: { _id: 1 }).each { |o| ... }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That example uses Mongoid, but this is a MongoDB problem, not a Mongoid one. It&amp;rsquo;s likely it affects other MongoDB libraries.&lt;/p&gt;
+
+&lt;h3&gt;Students get too many awards&lt;/h3&gt;
+
+&lt;p&gt;Each week, our systems distribute awards to students if they achieve certain goals. We started doing this naively: iterating through each record and calling a method on the object.
+This has a few benefits:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;the code is really easy to follow&lt;/li&gt;
+&lt;li&gt;for now, it runs quickly enough for our needs&lt;/li&gt;
+&lt;li&gt;it works&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;At least, we thought it worked. We&amp;rsquo;d started to notice more and more reports of people getting two awards where they should only be getting one. The awards were effectively identical, with only slight differences in created_at times to tell them apart.&lt;/p&gt;
+
+&lt;p&gt;We ruled out some of the obvious potential causes: our crons were only firing once, the code wasn&amp;rsquo;t accidentally creating two awards.&lt;/p&gt;
+
+&lt;p&gt;The only other possible solution we could see is if our iteration was somehow returning the same object twice. Nah, that can&amp;rsquo;t be it&amp;hellip; that&amp;rsquo;d be insane&amp;hellip; that&amp;rsquo;d be impossible&amp;hellip;&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Once you eliminate the impossible, whatever remains, no matter how improbable, must be the truth.&lt;/p&gt;
+
+&lt;p&gt;&lt;cite&gt;Arthur Conan Doyle&lt;/cite&gt;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;The Internet to the rescue!&lt;/h3&gt;
+
+&lt;p&gt;We stumbled across &lt;a href=&quot;http://stackoverflow.com/questions/16936299/rails-and-mongoid-returning-duplicate-records-for-query&quot;&gt;this post on stack overflow&lt;/a&gt; which suggested &lt;em&gt;that was it&lt;/em&gt;. By default, &lt;a href=&quot;http://docs.mongoDBdb.org/manual/reference/operator/snapshot/&quot;&gt;mongoDB returns documents more than once if a write operation moves the data&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A few test iterations through &amp;ldquo;all&amp;rdquo; records in our db confirmed that iterating &lt;em&gt;without&lt;/em&gt; a hint resulted in duplicates. Adding the hint meant we only got each record once. As far as we can tell, this is a MongoDB problem, not a Mongoid problem.&lt;/p&gt;
+
+&lt;h3&gt;Rant&lt;/h3&gt;
+
+&lt;p&gt;It&amp;rsquo;s not impossible that there is somebody out there has a need to return records twice in one iteration. Maybe. Regardless, there&amp;rsquo;s no way that is most common use case. MongoDB really doesn&amp;rsquo;t have that &lt;a href=&quot;http://blogs.msdn.com/b/brada/archive/2003/10/02/50420.aspx&quot;&gt;pit of success&lt;/a&gt; stuff down. This just seems like another time when MongoDB defaults are either wrong, misleading, or useless.&lt;/p&gt;
+
+&lt;p&gt;:sigh:&lt;/p&gt;
+
+&lt;p&gt;(Thanks to &lt;a href=&quot;http://stackoverflow.com/users/596956/jimoleary&quot;&gt;jimoleary&lt;/a&gt; for the helpful Stack Overflow comment)&lt;/p&gt;
+
+&lt;p&gt;(Originally posted at &lt;a href=&quot;http://dev.blake.com.au/blog/2013/09/25/mongo-is-mental/&quot;&gt;on the Blake Dev Team Blog&lt;/a&gt;)&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Dynamic Sites on Nginx With Passenger</title>
@@ -672,23 +731,6 @@ Screenshot:&lt;br /&gt;&lt;br /&gt;
   </entry>
   
   <entry>
-    <title>Badged Dock Icon for IPhone XCode development</title>
-    <link href="/articles/2009/01/21/badged-dock-icon-for-iphone-xcode-development/" />
-    <id>tag:blog.lucky-dip.net,2009-01-21:1232497227</id>
-    <updated>2009-01-21T11:20:27+11:00</updated>
-    <content type="html">&lt;p&gt;&lt;a href=&quot;http://twitter.com/drnic&quot;&gt;Dr Nic&lt;/a&gt; made a good suggestion on Twitter for a way to badge the XCode icon with the one currently in use.&lt;/p&gt;
-
-&lt;p&gt;
-Here's my attempt:
-&lt;a href=&quot;http://gist.github.com/49767&quot;&gt;http://gist.github.com/49767&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;p&gt;It relies on ImageMagick being installed (port install ImageMagick) and should be run from the project's directorin in the terminal.&lt;/p&gt;
-
-</content>
-  </entry>
-  
-  <entry>
     <title>ZSH</title>
     <link href="/articles/2008/06/27/zsh/" />
     <id>tag:blog.lucky-dip.net,2008-06-27:1214539580</id>
@@ -711,6 +753,23 @@ Features that I like in zsh:
 My zshrc is available here on github:
 &lt;a href=&quot;http://github.com/bradx3/dotfiles/tree/master/.zshrc&quot;&gt;http://github.com/bradx3/dotfiles/tree/master/.zshrc&lt;/a&gt;
 &lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Badged Dock Icon for IPhone XCode development</title>
+    <link href="/articles/2009/01/21/badged-dock-icon-for-iphone-xcode-development/" />
+    <id>tag:blog.lucky-dip.net,2009-01-21:1232497227</id>
+    <updated>2009-01-21T11:20:27+11:00</updated>
+    <content type="html">&lt;p&gt;&lt;a href=&quot;http://twitter.com/drnic&quot;&gt;Dr Nic&lt;/a&gt; made a good suggestion on Twitter for a way to badge the XCode icon with the one currently in use.&lt;/p&gt;
+
+&lt;p&gt;
+Here's my attempt:
+&lt;a href=&quot;http://gist.github.com/49767&quot;&gt;http://gist.github.com/49767&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;It relies on ImageMagick being installed (port install ImageMagick) and should be run from the project's directorin in the terminal.&lt;/p&gt;
+
+</content>
   </entry>
   
 </feed>

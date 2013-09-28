@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>2013</title>
+   <title>09</title>
    <meta name="author" content="" />
 
    <!--- Blueprint CSS Framework -->
@@ -44,7 +44,7 @@
    </div>
 
    <div class="column span-15 prepend-2 first content">
-      <h2>2013</h2>
+      <h2>09</h2>
 
 <div class="article">
   <h1><a href="/articles/2013/09/28/mongo-is-mental/">Mongo-Is-Mental</a><span class="date">(2013-09-28)</span></h1>
@@ -101,45 +101,6 @@ This has a few benefits:</p>
 <p>(Thanks to <a href="http://stackoverflow.com/users/596956/jimoleary">jimoleary</a> for the helpful Stack Overflow comment)</p>
 
 <p>(Originally posted at <a href="http://dev.blake.com.au/blog/2013/09/25/mongo-is-mental/">on the Blake Dev Team Blog</a>)</p>
-
-  </div>
-</div>
-<div class="article">
-  <h1><a href="/articles/2013/05/04/dynamic-sites-on-nginx-with-passenger/">Dynamic Sites on Nginx With Passenger</a><span class="date">(2013-05-04)</span></h1>
-
-  <div class="body">
-    <p>
-  If you are using passenger with nginx, it's possible to set nginx up in a way that
-  allows new apps (or branches of the same app) to be deployed with no change to the
-  server config.
-</p>
-<p>
-  <h3>Step 1</h3>
-  Add this config to your nginx.conf. Edit the hostname to match your server, and
-  the root to match your deploy directory
-  <pre>server {
-   server_name ~^([-\w]+)\.yourdomain.com;
-   root /var/www/$1/current/public;
-   passenger_enabled on;
-}</pre>
-</p>
-<p>
-  <h3>Step 2</h3>
-  Deploy your rails app to /var/www/whatever/current. The app will then be available
-  at http://whatever.yourdomain.com.
-  <br/><br/>
-  Similarly, deploying to /var/www/some-internal-app/current means the app will be available at
-  http://some-internal-app.yourdomain.com
-</p>
-<p>
-  <h3>Notes</h3>
-  This technique probably isn't ideal for production sites, but for internal and or
-  temporary sites it is quite useful. Passenger takes care of spinning up apps as they
-  are requested, so if one app is getting lots of requests, passenger will naturally
-  spin up more app servers for that one, potentially spinning down unused apps. Providing
-  all apps aren't being constantly accessed, this acts as a kind of resource balancing
-  allowing an underpowered internal server to serve a lot of apps.
-</p>
 
   </div>
 </div>
