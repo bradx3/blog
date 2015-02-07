@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Element.insert, Prototype and named anchors"
+date: 2008-11-25 11:46:11 +1100
+---
+
+<p>This was a strange one.</p>
+
+<p>
+HTML:
+<pre class="brush: xml">
+&lt;a name="questions"&gt;
+&lt;div class="questions"&gt;
+&lt;/div&gt;
+</pre>
+</p>
+<p>
+JS:
+<pre class="brush: jscript">
+Element.insert("questions", { bottom : "&lt;div&gt;Test&lt;/div&gt;" })
+</pre>
+</p>
+<p>
+With that setup, IE compains and says "Invalid source HTML for this operation". It turns out that prototype was trying to put the div into the a tag. I guess I can see how it happened, but I sure didn't expect it. 
+</p>
+<p>
+Anyway I removed the a tag completely and everything works fine. Weird.
+</p>

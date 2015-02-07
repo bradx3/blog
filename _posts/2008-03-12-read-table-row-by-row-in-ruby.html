@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Read table row-by-row in ruby"
+date: 2008-03-12 12:05:15 +1100
+---
+
+<p>
+I needed to export some data from a huge data table. Iterating through MyModel.find took too long and too much ram, so I went straight to the db instead. 
+</p>
+
+Example code was tough to find, so here's an example:
+
+<pre class="brush: ruby">
+sql = "select * from #{ MyModel.table_name }"
+MyModel.connection.execute(sql) do |handle|
+  handle.fetch do |row|
+    # row is an array of values
+    ... export row ...
+  end
+end
+</pre>

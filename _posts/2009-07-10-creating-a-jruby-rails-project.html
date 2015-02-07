@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Creating a jruby rails project"
+date: 2009-07-10 08:08:26 +1000
+---
+ 
+<p>
+For some reason, this command:
+<pre class="brush: bash">
+jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails
+</pre>
+didn't install all the required gems I needed.
+</p>
+<p>
+Manually listing all the basic rails gems needed fixed the problem for me though. Working command:
+<pre class="brush: bash">
+jruby -S gem install mongrel activerecord-jdbcmysql-adapter rails \
+activesupport actionmailer activerecord actionpack activeresource
+</pre>

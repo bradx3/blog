@@ -1,0 +1,34 @@
+---
+layout: post
+title: "Restart Passenger From Emacs Using Rinari"
+date: 2009-08-06 14:27:33 +1000
+---
+ 
+<p>
+Being able to completely re-program your editor is fun. I feel like I've got a 
+long way to go before I'm an Emacs Guru (if anybody *ever* becomes a true
+Emacs Guru), but it's nice being able to easily
+automate things I do in my editor.
+</p>
+<p>
+I've been experimenting with using <a href="http://www.modrails.com/">Passenger</a>
+in development instead of script/server. It's not too bad. It's nice to have
+a server always ready to go, but it does make dropping down to the debugger
+difficult.
+</p>
+<p>
+Anyway, here is a small snippet of emacs lisp to easily restart the Passenger
+server for the project you are currently working on. It assumes you have 
+<a href="http://rinari.rubyforge.org/">Rinari</a> installed.
+
+<h4>The function:</h4>
+<pre class="brush: plain">
+(defun restart-passenger ()
+  "Restart passenger using the current rinari root" (interactive)
+  (shell-command (concat "touch " (rinari-root) "tmp/restart.txt")))
+</pre>
+<h4>And to bind it to a key</h4>
+<pre class="brush: plain">
+(global-set-key (kbd "C-c ' p") 'restart-passenger)
+</pre>
+</p>

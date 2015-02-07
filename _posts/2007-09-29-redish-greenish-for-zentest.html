@@ -1,0 +1,49 @@
+---
+layout: post
+title: "Redish Greenish for ZenTest"
+date: 2007-09-29 13:39:00 +1000
+---
+
+<p>
+<a href="http://www.zenspider.com/ZSS/Products/ZenTest/">ZenTest</a> is a great tool. I use it and its redgreen plugin a lot to easily keep an eye on my tests.
+</p>
+
+<p>
+I use a green terminal background though, so when my tests pass, rather than a green line, I have to rely on a lack of a red line. This isn't so bad, but I thought it could be improved with a little effort.
+</p>
+
+<p>
+Redish greenish is an extension of redgreen that allows you to specify the colours used for tests passing and/or failing.
+</p>
+
+<p>
+To use it, <a href="http://blog.lucky-dip.net/files/redishgreenish.rb">save this file</a> into your autotest lib directory. (Mine is GEM_PATH/1.8/gems/ZenTest-3.6.1/lib/autotest/). To enable redishgreenish, you'll need to modify your autotest config file. Open "~/.autotest" and change the line:
+<br />
+<pre class="brush: ruby">
+require 'autotest/redgreen'
+</pre>
+<br />
+to 
+<br />
+<pre class="brush: ruby">
+require 'autotest/redishgreenish'
+</pre>
+</p>
+
+<p>
+At this point, autotest will behave exactly the same as if redgreen was used. To change the colour of the lines used to signify tests passing and failing, your autotest config file should look like
+<br />
+<pre class="brush: ruby">
+PASSED = :blue
+FAILED = :yellow
+require 'autotest/redishgreenish'
+</pre>
+</p>
+
+<p>
+Valid values for colours are
+<br />
+<pre class="brush: ruby">
+:black, :red, :green, :yellow, :blue, :magenta, :cyan, :white
+</pre>
+</p>

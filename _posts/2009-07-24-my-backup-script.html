@@ -1,0 +1,54 @@
+---
+layout: post
+title: "My Backup Script"
+date: 2009-07-24 08:25:51 +1000
+---
+ 
+<p>
+  This is my simple backup script. It keeps everything I don't already have backed up 
+  in version control safe and sound from hardware failure. Not from me though - 
+  if I delete a file accidentally, that file is really gone
+  (unless you act fast before the next backup runs!). 
+  If I make a bad edit, that file is busted.
+  <br />
+  <br />
+  But I can live with that. 
+</p>
+
+<p>
+  <h3>backup.rb</h3>
+  Backup.rb uses rsync over ssh to backup a number of different server. Rsync is good
+  because it only sends what changed, so we're not transferring gigs every night.
+  <br /><br />
+  You'll have to make some changes to the SSH_USER, REMOTE_DIR and HOSTS constants. 
+  You could also add any file types you want to ignore to the EXCLUDES list.
+
+  <pre class="brush: ruby">
+#!/usr/bin/env ruby
+
+NAME = %x{ hostname }.strip
+SSH_USER = "brad"
+REMOTE_DIR = "/home/brad/Backups/#{ NAME }"
+
+HOSTS = [ "clamps", "hubert.lucky-dip.net" ]
+DIRS = [
+        "~/Library", 
+        "~/Documents",
+        "~/Pictures"
+]
+EXCLUDES = [
+            "*Cache*",
+            "*NewsFire*",
+            "*Cookies*",
+            "*.log",
+            "HistoryIndex.ox*",
+            "*Virtual Machines*",
+            "*.resume",
+            "*.ipsw",
+            "*.dmg",
+            "*.corrupt"
+]
+
+HOSTS.each do |host|
+  DIRS.each do |dir|
+    puts "

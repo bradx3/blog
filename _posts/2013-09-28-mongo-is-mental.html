@@ -1,0 +1,57 @@
+---
+layout: post
+title: "MongoDB  Is Mental"
+date: 2013-09-28 12:02:29 +1000
+---
+ 
+<h3>Pro tip: MongoDB cursors return duplicate records</h3>
+
+<p>If you are iterating through a data set, you should switch from:</p>
+
+<pre><code>Object.each { |o| ... }
+</code></pre>
+
+<p>to</p>
+
+<pre><code>Object.extras(hint: { _id: 1 }).each { |o| ... }
+</code></pre>
+
+<p>That example uses Mongoid, but this is a MongoDB problem, not a Mongoid one. It&rsquo;s likely it affects other MongoDB libraries.</p>
+
+<h3>Students get too many awards</h3>
+
+<p>Each week, our systems distribute awards to students if they achieve certain goals. We started doing this naively: iterating through each record and calling a method on the object.
+This has a few benefits:</p>
+
+<ol>
+<li>the code is really easy to follow</li>
+<li>for now, it runs quickly enough for our needs</li>
+<li>it works</li>
+</ol>
+
+
+<p>At least, we thought it worked. We&rsquo;d started to notice more and more reports of people getting two awards where they should only be getting one. The awards were effectively identical, with only slight differences in created_at times to tell them apart.</p>
+
+<p>We ruled out some of the obvious potential causes: our crons were only firing once, the code wasn&rsquo;t accidentally creating two awards.</p>
+
+<p>The only other possible solution we could see is if our iteration was somehow returning the same object twice. Nah, that can&rsquo;t be it&hellip; that&rsquo;d be insane&hellip; that&rsquo;d be impossible&hellip;</p>
+
+<blockquote><p>Once you eliminate the impossible, whatever remains, no matter how improbable, must be the truth.</p>
+
+<p><cite>Arthur Conan Doyle</cite></p></blockquote>
+
+<h3>The Internet to the rescue!</h3>
+
+<p>We stumbled across <a href="http://stackoverflow.com/questions/16936299/rails-and-mongoid-returning-duplicate-records-for-query">this post on stack overflow</a> which suggested <em>that was it</em>. By default, <a href="http://docs.mongoDBdb.org/manual/reference/operator/snapshot/">mongoDB returns documents more than once if a write operation moves the data</a>.</p>
+
+<p>A few test iterations through &ldquo;all&rdquo; records in our db confirmed that iterating <em>without</em> a hint resulted in duplicates. Adding the hint meant we only got each record once. As far as we can tell, this is a MongoDB problem, not a Mongoid problem.</p>
+
+<h3>Rant</h3>
+
+<p>It&rsquo;s not impossible that there is somebody out there has a need to return records twice in one iteration. Maybe. Regardless, there&rsquo;s no way that is most common use case. MongoDB really doesn&rsquo;t have that <a href="http://blogs.msdn.com/b/brada/archive/2003/10/02/50420.aspx">pit of success</a> stuff down. This just seems like another time when MongoDB defaults are either wrong, misleading, or useless.</p>
+
+<p>:sigh:</p>
+
+<p>(Thanks to <a href="http://stackoverflow.com/users/596956/jimoleary">jimoleary</a> for the helpful Stack Overflow comment)</p>
+
+<p>(Originally posted at <a href="http://dev.blake.com.au/blog/2013/09/25/mongo-is-mental/">on the Blake Dev Team Blog</a>)</p>

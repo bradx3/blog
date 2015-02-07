@@ -1,0 +1,25 @@
+---
+layout: post
+title: "Haml & Sass Editor For Eclipse"
+date: 2007-06-21 18:58:45 +1000
+---
+
+<p><strong>These editors have been merged into the <a href="http://aptana.com/">Aptana</a> project. Please don't post any error reports here.</strong></p> 
+<p>
+I did some very basic editors for Haml and Sass a while back. At the time I was interested in Haml. It's elegant to write, and the automatically formatted html it outputs just made it a match made in heaven.
+</p>
+<p>
+Fast forward a few months and now I'm actually using Haml and Sass. It's as good as I ever hoped it would be. With Haml and a little bit of FormBuilder magic I'm making useful forms in four short lines. Too good.
+</p>
+<p>
+Anyway coming with using it is the chance to see some shortcomings in my own editors, so I've spent a bit of time updating them. I've set up a proper Eclipse update site, so you can just add 'http://haml.lucky-dip.net' via the 'Help - Software Updates - Find and Install' menu option. That should help minimize a few errors with the various versions of Eclipse and RDT around. All references to the RadRails plugins have been removed. There was a bit of code that I pulled into my plugin, but with RadRails/Aptana in heavy dev it's easier for me to forget about trying to keep up for a while.
+</p>
+<p>
+Also added is code folding. There's a bit of work still to do on this one. You can currently only fold top level elements. This can be a pain when you've got all your code in one file, but if you're using layouts and partial in a sensible way it should hopefully be of some use. 
+</p>
+<p>
+One thing I found a bit tricky was figuring out which element I was under when I was editing. Some people might like turning on space markers (can you actually do that in Eclipse?), but I figured a character matcher would do the trick. So now as you move around in the editors there'll be a blue box around the element you are currently in. At the moment it just highlights the first letter of the element. I'm going to see if I can get the whole element happening for the next release.
+</p>
+<p>
+So I hope it works well for people. Set up an Eclipse update site of 'http://haml.lucky-dip.net' and that should keep you informed as new versions come out.
+</p>

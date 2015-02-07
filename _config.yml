@@ -11,3 +11,4 @@ github_username:  bradx3
 
 # Build settings
 exclude: [vendor]
+permalink: /articles/:year/:month/:day/:title
