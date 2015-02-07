@@ -4,8 +4,6 @@ layout: default
 
 <div class="home">
 
-  <h1 class="page-heading">Posts</h1>
-
   <ul class="post-list">
     {% for post in site.posts %}
       <li>
@@ -14,6 +12,13 @@ layout: default
         <h2>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
+        <p>
+          {{ post.content }}
+        </p>
+
+        <p class="comments">
+          <a href="{{ site.url }}{{ page.url }}#disqus_thread">Comments</a>
+        </p>
       </li>
     {% endfor %}
   </ul>
@@ -21,3 +26,18 @@ layout: default
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+        var links = document.getElementsByTagName('a');
+        var query = '?';
+        for(var i = 0; i < links.length; i++) {
+            if(links[i].href.indexOf('#disqus_thread') >= 0) {
+                query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+            }
+        }
+        document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/lucky-dipblog/get_num_replies.js' + query + '"></' + 'script>');
+    })();
+//]]>
+</script>

@@ -15,7 +15,7 @@ $spacing-unit:     30px;
 
 $text-color:       #111;
 $background-color: #fdfdfd;
-$brand-color:      #2a7ae2;
+$brand-color:      #F85B10;
 
 $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
@@ -25,6 +25,17 @@ $on-palm:          600px;
 $on-laptop:        800px;
 
 
+.post-list li {
+  border-bottom: 1px solid $grey-color-light;
+  padding: 15px 0 25px;
+}
+
+.site-title {
+  background-image: url(/images/banner.gif);
+  height: 98px;
+  text-indent: -10000px;
+  width: 790px;
+}
 
 // Using media queries with like this:
 // @include media-query($palm) {
