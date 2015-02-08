@@ -1,0 +1,62 @@
+---
+layout: post
+title: "Convert Webby to Jekyll"
+---
+
+<p>
+  I'm going to blog more. When I think of the countless times other people sharing information
+  helps me every day, I feel bad I don't share more.
+</p>
+<p>
+  One thing that has been acting as a block to more sharing was my old
+  blog software. It was using <a href="https://rubygems.org/gems/webby">Webby</a>.
+  Webby is a nice static site generator, but one that hasn't been touched
+  since 2009. Every time I wanted to post, I had to reinstall Ruby 1.8.7,
+  patch together the old gems and hope everything still somehow held together.
+</p>
+<p>
+  That's too high a bar for me - most of the stuff I want to share isn't
+  really enough to warrant that effort. It's not that I want to share total
+  rubbish (I hope!), just that taking 45 minutes before I can even start a post
+  really puts the pressure on.
+</p>
+<p>
+  So I'm finally switching to Github pages and Jekyll. With that combination
+  I can write up some HTML, commit, then push. Hopefully that's convenient enough that
+  I can push up scripts, hacks, random thoughts and ideas that might help others.
+</p>
+<p>
+  A decent way to start seems to be to post the script I used to convert
+  my old posts from Webby to Jekyll. Not fancy, but it'll do the trick.
+
+  {% highlight ruby %}
+require "yaml"
+
+root = "[local path to old blog]"
+posts = "[local path to new blog]/_posts"
+
+Dir.glob("#{root}**/*.txt").each do |f|
+  next if File.basename(f) == "index.txt"
+
+  _junk, header, body = File.read(f).split("---")
+
+  name = File.basename(f)
+  date = f.gsub(root, "").gsub("/#{name}", "").gsub("/", "-")
+  metadata = YAML.load(header)
+  destination = "#{posts}/#{date}-#{name.gsub('.txt', '.html')}"
+
+  File.open(destination, "w") do |out|
+    out.puts("---")
+    out.puts("layout: post")
+    out.puts("title: \"#{metadata['title']}\"")
+    out.puts("date: #{metadata['created_at']}")
+    out.puts("---")
+    out.puts(body.gsub("\r\n", "\n"))
+  end
+
+  puts(f)
+  puts(destination)
+  puts("==============================")
+end
+  {% endhighlight %}
+</p>
