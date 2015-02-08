@@ -4,8 +4,8 @@ email: brad@lucky-dip.net
 description: > # this means to ignore newlines until "baseurl:"
   A developer and team leader who loves Ruby, HTML and Javascript.
   Everything programming related now I think about it...
-baseurl: "/blog/" # the subpath of your site, e.g. /blog/
-url: "http://bradx3.github.io" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://blog.lucky-dip.net" # the base hostname & protocol for your site
 twitter_username: bradx3
 github_username:  bradx3
 
