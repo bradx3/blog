@@ -1,0 +1,55 @@
+---
+layout: post
+title: Quieter Errors with Sidekiq
+---
+
+<p>
+  At my current job, we do a lot of integration with external APIs. In
+  order to keep our UI snappy and our web servers happy, we send a lot of
+  that communication into <a href="http://sidekiq.org/">Sidekiq</a> workers.
+</p>
+
+<p>
+  That mostly works well, but we do hit temporary problems sometimes (network
+  timeouts, random failures on the other end, etc). Sidekiq really tries hard
+  to let you fix errors in workers, <a href="https://github.com/mperham/sidekiq/wiki/Error-Handling">trying 25 times</a>
+  before conceding defeat, so often these temporary failures are best handled
+  by letting Sidekiq do it's thing.
+</p>
+
+<p>
+  Unfortunately when combined with an error notification service like
+  <a href="https://rollbar.com">Rollbar</a> (or <a href="https://airbrake.io/">Airbrake</a> or
+  <a href="https://www.honeybadger.io/">Honeybadger</a>) you can end up with some
+  really noisy errors. Below is a small snippet that will only send through
+  the first error to Rollbar.
+</p>
+
+<p>
+  I'd prefer to be able to make every line of our app handle every possible
+  error that can come up. We're working on that. Until that happens, having
+  a single error per worker means we don't end up prioritising worker errors
+  over web server errors becuase they look 25 times more common!
+</p>
+
+<p>
+  {% highlight ruby %}
+  # Some Sidekiq middleware to stop us sending errors for every single
+  # retry to rollbar
+  class SilenceRetryErrorMiddleware
+    def call(_worker_class, msg, _queue)
+      if msg.key?("retry_count")
+        Rollbar.silenced { yield }
+      else
+        yield
+      end
+    end
+  end
+
+  Sidekiq.configure_server do |config|
+    config.server_middleware do |chain|
+      chain.add(SilenceRetryErrorMiddleware)
+    end
+  end
+  {% endhighlight %}
+</p>
