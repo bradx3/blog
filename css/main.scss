@@ -33,6 +33,10 @@ $on-laptop:        800px;
   text-indent: -10000px;
 }
 
+.small {
+  color: $grey-color;
+  font-size: 70%;
+}
 .tagline {
   line-height: 56px;
   float: left;

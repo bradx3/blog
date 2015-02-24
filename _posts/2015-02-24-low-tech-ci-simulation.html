@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Low Tech CI Simulation"
+---
+
+<p>
+  Are random CI failures getting you down?
+</p>
+<p>
+  Are you pretty sure it's a timing issue but just can't quite reason it out?
+</p>
+<p>
+  Are you unable to replicate the problem locally on your mac?
+</p>
+<p>
+  Try my new script to slow your machine to a crawl. It'll fix you test problems guaranteed!*
+</p>
+<p class="small">
+  * Not a guarantee
+</p>
+<p>
+  {% highlight ruby %}
+#!/usr/bin/env ruby
+
+# leave one CPU free to run tests:
+cpus = `sysctl -n hw.ncpu`.to_i - 1
+
+puts("Forking #{cpus} processes")
+(0..cpus).each { Process.spawn("yes > /dev/null") }
+
+Process.wait
+  {% endhighlight %}
+</p>
+<p>
+  Dodgy? Yes.
+</p>
+<p>
+  Handy? Very.
+</p>

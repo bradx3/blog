@@ -10,5 +10,6 @@ twitter_username: bradx3
 github_username:  bradx3
 
 # Build settings
+excerpt_separator: ""   # Workaround for http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed
 exclude: [vendor]
 permalink: /articles/:year/:month/:day/:title
